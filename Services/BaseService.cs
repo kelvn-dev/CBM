@@ -99,5 +99,47 @@ namespace CBM.Services {
       }
       return model;
     }
+
+    public static List<T> GetPaginatedData(
+      int pageIndex
+     ) {
+
+      string selectStatement = $"SELECT * FROM {tableName} ";
+      string pagingStatement = $" OFFSET {pageIndex * pageSize} ROWS FETCH NEXT {pageSize} ROWS ONLY ";
+
+      string sqlQuery = @$"{selectStatement} {pagingStatement}";
+      Console.WriteLine(sqlQuery);
+      List<T> modelList = new List<T>();
+      using (var connection = ConnectionFactory.Create()) {
+        var command = connection.CreateCommand();
+        command.CommandText = sqlQuery;
+        var reader = command.ExecuteReader();
+        while (reader.Read()) {
+          T model = new T();
+          for (int i = 0; i < reader.FieldCount; i++) {
+            model[reader.GetName(i)] = reader.GetValue(i);
+          }
+          modelList.Add(model);
+        }
+      }
+      return modelList;
+    }
+
+    public static int GetTotalItems() {
+      string sqlQuery = $"SELECT Rows FROM SYSINDEXES " +
+                        $"WHERE Id = OBJECT_ID('{tableName}') AND IndId < 2";
+      using (var connection = ConnectionFactory.Create()) {
+        var commnad = connection.CreateCommand();
+        commnad.CommandText = sqlQuery;
+        int totalItems = (int)commnad.ExecuteScalar();
+        return totalItems;
+      }
+    }
+
+    public static int GetTotalPages() {
+      int totalItems = GetTotalItems();
+      int totalPages = totalItems / pageSize;
+      return totalItems % pageSize > 0 ? ++totalPages : totalPages;
+    }
   }
 }
