@@ -62,6 +62,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Constant.cs" />
     <Compile Include="Models\Admin.cs" />
     <Compile Include="Models\BaseModel.cs" />
     <Compile Include="Presenters\AdministratorPresenter.cs" />
@@ -80,6 +81,18 @@
     <Compile Include="Views\AdministratorView.Designer.cs">
       <DependentUpon>AdministratorView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\BaseView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\BaseView.Designer.cs">
+      <DependentUpon>BaseView.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Views\BaseView.resx">
+      <DependentUpon>BaseView.cs</DependentUpon>
+    </EmbeddedResource>
+    <Compile Include="Views\GenericViews\AdministratorGenericView.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -89,9 +102,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Views\AdministratorView.resx">
-      <DependentUpon>AdministratorView.cs</DependentUpon>
-    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

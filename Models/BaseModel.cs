@@ -23,9 +23,9 @@ namespace CBM.Models {
       set => _id = value;
     }
 
-    public DateTime createdTime {
+    public DateTime? createdTime {
       get => _createdTime;
-      set => _createdTime = value;
+      set => _createdTime = (DateTime) value;
     }
   }
 }

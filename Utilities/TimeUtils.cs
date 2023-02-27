@@ -13,18 +13,7 @@ namespace CBM.Utilities {
     }
 
     public static string GetCurrentFormattedTime() {
-      DateTime currentTime = DateTime.Now;
-      int day = currentTime.Day;
-      Console.WriteLine(day);
-      int month = currentTime.Month;
-      Console.WriteLine(month);
-      int year = currentTime.Year;
-      int hour = currentTime.Hour;
-      int minute = currentTime.Minute;
-      int second = currentTime.Second;
-      string formatted = currentTime.ToString("dd/MM/yyyy HH:mm");
-      Console.WriteLine(formatted);
-      return formatted;
+      return DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss tt");
     }
 
   }

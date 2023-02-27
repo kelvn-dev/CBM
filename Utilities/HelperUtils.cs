@@ -8,6 +8,7 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace CBM.Utilities {
   public class HelperUtils {
@@ -20,24 +21,28 @@ namespace CBM.Utilities {
       throw new KeyNotFoundException();
     }
 
+    static bool IsUsedProperty(string propertyName) {
+      if (propertyName.Equals("Item") || propertyName.Equals("id") || propertyName.Equals("createdTime")) {
+        return false;
+      }
+      return true;
+    }
+
     public static PropertyInfo[] GetPublicPropertyInfos(Type type) {
       PropertyInfo[] propertyInfos = type.GetProperties(BindingFlags.Public | BindingFlags.Instance);
-      return propertyInfos;
+      return propertyInfos.Where(e => IsUsedProperty(e.Name)).ToArray();
     }
 
     public static void MapModelToInsertCommand(BaseModel model, SqlCommand command) {
       string sqlQuery = command.CommandText;
       // INSERT INTO admin (id, name, age) VALUES (@name, @age)
       //                    columns             values
-      string columns = "(id, createdTime";
-      string values = "(@id, @createdTime";
+      string columns = "(id, createdTime, ";
+      string values = "(@id, @createdTime, ";
 
       PropertyInfo[]  propertyInfos = GetPublicPropertyInfos(model.GetType());
       foreach (PropertyInfo propertyInfo in propertyInfos) {
         string name = propertyInfo.Name;
-        if (name.Equals("Item") || name.Equals("id")) {
-          continue;
-        }
         object value = model[name];
         columns += $"{name}, ";
         values += $"@{name}, ";
@@ -55,9 +60,6 @@ namespace CBM.Utilities {
       PropertyInfo[] propertyInfos = GetPublicPropertyInfos(model.GetType());
       foreach (PropertyInfo propertyInfo in propertyInfos) {
         string name = propertyInfo.Name;
-        if (name.Equals("Item") || name.Equals("id")) {
-          continue;
-        }
         object value = model[name];
         if (value != null) {
           Console.WriteLine(value);

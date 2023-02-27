@@ -4,9 +4,6 @@ using CBM.Utilities;
 using CBM.Views;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CBM.Presenters {
@@ -22,7 +19,6 @@ namespace CBM.Presenters {
       LoadListingData();
       this.view.MapDataSource(bindingSource);
       this.view.Show();
-      this.view.TEST();
 
       this.view.CreateEvent += delegate (object sender, EventArgs e) { this.view.isUpdate = false; };
       this.view.SaveEvent += Save;
@@ -30,9 +26,12 @@ namespace CBM.Presenters {
       this.view.DeleteEvent += DeleteSelectedData;
       this.view.GetPrePageEvent += LoadPrePageData;
       this.view.GetNextPageEvent += LoadNextPageData;
+      this.view.SortEvent += LoadSortedData;
+      this.view.SearchEvent += LoadSearchedData;
+      this.view.CancelEvent += CleanFields;
     }
 
-    private void CleanFields() {
+    private void CleanFields(object sender = null, EventArgs e = null) {
       view.name = string.Empty;
       view.age = 0;
     }
@@ -47,9 +46,21 @@ namespace CBM.Presenters {
       LoadListingData();
     }
 
+    private void LoadSortedData(object sender, EventArgs e) {
+      LoadListingData();
+    }
+
+    private void LoadSearchedData(object sender, EventArgs e) {
+      LoadListingData();
+    }
+
     private void LoadListingData() {
-      int pageIndex = view.currentPage - 1;
-      List <Admin> administratorList = AdminService.GetPaginatedData(pageIndex, view.orderBy, view.orderDirection);
+      List<Admin> administratorList = AdminService.GetPaginatedData(
+        pageIndex: view.currentPage - 1,
+        keyword: view.keyword.Equals(Constant.PLACEHOLDER_SEARCH_TXT) ? null : view.keyword,
+        orderBy: view.orderBy,
+        orderDirection: view.orderDirection
+       );
       UpdatePageLabel();
       CheckAvailabilityNavigatingPage();
       bindingSource.DataSource = administratorList;
@@ -83,12 +94,13 @@ namespace CBM.Presenters {
       Admin admin = bindingSource.Current as Admin;
       view.id = admin.id;
       view.name = admin.name;
-      view.age = (int) admin.age;
+      view.age = (int)admin.age;
     }
 
     private void DeleteSelectedData(object sender, EventArgs e) {
       Admin admin = bindingSource.Current as Admin;
       AdminService.DeleteById(admin.id);
+      LoadListingData();
     }
 
     private void Save(object sender, EventArgs e) {

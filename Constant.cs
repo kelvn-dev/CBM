@@ -5,11 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace CBM {
-  public static class Enum {
-    
-    public enum OrderDirection {
-      ASC, DESC
-    }
+  public static class Constant {
+
+    public const string PLACEHOLDER_SEARCH_TXT = "Search...";
 
   }
 }

@@ -3,17 +3,13 @@ using CBM.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using CBM.Enum;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static CBM.Enum.Enum;
+using System.Reflection;
+using static CBM.Enum;
 
 namespace CBM.Services {
-  public class BaseService<T> where T: BaseModel, new() {
+  public class BaseService<T> where T : BaseModel, new() {
 
     private static readonly string tableName = HelperUtils.GetTableName(typeof(T));
-    //private static PagingService pagingService = new PagingService();
     private static readonly int pageSize = 5;
 
     public static void Create(T model) {
@@ -44,9 +40,9 @@ namespace CBM.Services {
       using (var connection = ConnectionFactory.Create()) {
         var command = connection.CreateCommand();
         command.CommandText = sqlQuery;
-        
+
         HelperUtils.MapModelToUpdateCommand(model, command);
-        
+
         try {
           if (!string.IsNullOrEmpty(command.CommandText)) {
             command.CommandText += condition;
@@ -104,21 +100,34 @@ namespace CBM.Services {
 
     public static List<T> GetPaginatedData(
       int pageIndex,
+      string keyword = null,
       string orderBy = "createdTime",
       OrderDirection orderDirection = OrderDirection.DESC
      ) {
+
+      string selectStatement = $"SELECT * FROM {tableName} ";
+      string sortStatement = $" ORDER BY {orderBy ?? "createdTime"} {orderDirection.ToString()} ";
+      string pagingStatement = $" OFFSET {pageIndex * pageSize} ROWS FETCH NEXT {pageSize} ROWS ONLY ";
+      string conditionStatement = "";
+      if (!string.IsNullOrEmpty(keyword)) {
+        conditionStatement = " WHERE";
+        PropertyInfo[] propertyInfos = HelperUtils.GetPublicPropertyInfos(typeof(T));
+        foreach (PropertyInfo propertyInfo in propertyInfos) {
+          conditionStatement += $" OR {propertyInfo.Name} LIKE '%{keyword}%' ";
+        }
+        conditionStatement = conditionStatement.Replace("WHERE OR", "WHERE");
+      }
+
+      string sqlQuery = @$"{selectStatement} {conditionStatement} {sortStatement} {pagingStatement}";
+      Console.WriteLine(sqlQuery);
       List<T> modelList = new List<T>();
-      string sqlQuery = $"SELECT * FROM {tableName} ORDER BY {orderBy ?? "createdTime"} {orderDirection.ToString()}" +
-                        $" OFFSET {pageIndex * pageSize} ROWS" +
-                        $" FETCH NEXT {pageSize} ROWS ONLY";
-      Console.WriteLine( sqlQuery );
       using (var connection = ConnectionFactory.Create()) {
         var command = connection.CreateCommand();
         command.CommandText = sqlQuery;
         var reader = command.ExecuteReader();
         while (reader.Read()) {
           T model = new T();
-          for (int i=0; i<reader.FieldCount; i++) {
+          for (int i = 0; i < reader.FieldCount; i++) {
             model[reader.GetName(i)] = reader.GetValue(i);
           }
           modelList.Add(model);
