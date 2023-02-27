@@ -6,6 +6,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static CBM.Enum;
 
 namespace CBM.Services {
   public class BaseService<T> where T: BaseModel, new() {
@@ -101,13 +102,16 @@ namespace CBM.Services {
     }
 
     public static List<T> GetPaginatedData(
-      int pageIndex
+      int pageIndex,
+      string orderBy = "createdTime",
+      OrderDirection orderDirection = OrderDirection.DESC
      ) {
 
       string selectStatement = $"SELECT * FROM {tableName} ";
+      string sortStatement = $" ORDER BY {orderBy ?? "createdTime"} {orderDirection.ToString()} ";
       string pagingStatement = $" OFFSET {pageIndex * pageSize} ROWS FETCH NEXT {pageSize} ROWS ONLY ";
 
-      string sqlQuery = @$"{selectStatement} {pagingStatement}";
+      string sqlQuery = @$"{selectStatement} {sortStatement} {pagingStatement}";
       Console.WriteLine(sqlQuery);
       List<T> modelList = new List<T>();
       using (var connection = ConnectionFactory.Create()) {
