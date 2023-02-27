@@ -103,6 +103,7 @@ namespace CBM.Services {
 
     public static List<T> GetPaginatedData(
       int pageIndex,
+      string keyword = null,
       string orderBy = "createdTime",
       OrderDirection orderDirection = OrderDirection.DESC
      ) {
@@ -110,8 +111,17 @@ namespace CBM.Services {
       string selectStatement = $"SELECT * FROM {tableName} ";
       string sortStatement = $" ORDER BY {orderBy ?? "createdTime"} {orderDirection.ToString()} ";
       string pagingStatement = $" OFFSET {pageIndex * pageSize} ROWS FETCH NEXT {pageSize} ROWS ONLY ";
+      string conditionStatement = "";
+      if (!string.IsNullOrEmpty(keyword)) {
+        conditionStatement = " WHERE";
+        PropertyInfo[] propertyInfos = HelperUtils.GetPublicPropertyInfos(typeof(T));
+        foreach (PropertyInfo propertyInfo in propertyInfos) {
+          conditionStatement += $" OR {propertyInfo.Name} LIKE '%{keyword}%' ";
+        }
+        conditionStatement = conditionStatement.Replace("WHERE OR", "WHERE");
+      }
 
-      string sqlQuery = @$"{selectStatement} {sortStatement} {pagingStatement}";
+      string sqlQuery = @$"{selectStatement} {conditionStatement} {sortStatement} {pagingStatement}";
       Console.WriteLine(sqlQuery);
       List<T> modelList = new List<T>();
       using (var connection = ConnectionFactory.Create()) {
