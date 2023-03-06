@@ -6,6 +6,6 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace CBM.Services {
-  public class AdminService: BaseService<Admin> {
+  public class AdminService: BaseService<Administrator> {
   }
 }

@@ -9,10 +9,10 @@ using System.Windows.Forms;
 namespace CBM.Presenters {
   public class AdministratorPresenter {
 
-    private AdministratorView view;
+    private AdministratorView<Administrator> view;
     private BindingSource bindingSource;
 
-    public AdministratorPresenter(AdministratorView view) {
+    public AdministratorPresenter(AdministratorView<Administrator> view) {
       this.view = view;
       this.bindingSource = new BindingSource();
 
@@ -55,7 +55,7 @@ namespace CBM.Presenters {
     }
 
     private void LoadListingData() {
-      List<Admin> administratorList = AdminService.GetPaginatedData(
+      List<Administrator> administratorList = AdminService.GetPaginatedData(
         pageIndex: view.currentPage - 1,
         keyword: view.keyword.Equals(Constant.PLACEHOLDER_SEARCH_TXT) ? null : view.keyword,
         orderBy: view.orderBy,
@@ -91,20 +91,20 @@ namespace CBM.Presenters {
     }
 
     private void LoadSelectedData(object sender, EventArgs e) {
-      Admin admin = bindingSource.Current as Admin;
+      Administrator admin = bindingSource.Current as Administrator;
       view.id = admin.id;
       view.name = admin.name;
       view.age = (int)admin.age;
     }
 
     private void DeleteSelectedData(object sender, EventArgs e) {
-      Admin admin = bindingSource.Current as Admin;
+      Administrator admin = bindingSource.Current as Administrator;
       AdminService.DeleteById(admin.id);
       LoadListingData();
     }
 
     private void Save(object sender, EventArgs e) {
-      Admin admin = new Admin {
+      Administrator admin = new Administrator {
         name = view.name,
         age = Convert.ToInt32(view.age),
       };
@@ -112,7 +112,7 @@ namespace CBM.Presenters {
       try {
         ModelValidation.Validate(admin);
         if (view.isUpdate) {
-          Admin beforeUpdatedAdmin = bindingSource.Current as Admin;
+          Administrator beforeUpdatedAdmin = bindingSource.Current as Administrator;
           admin.id = beforeUpdatedAdmin.id;
           AdminService.Update(admin);
           view.message = "Updated successfully";

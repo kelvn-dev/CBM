@@ -4,11 +4,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CBM.Models {
   [Table("admin")]
-  public class Admin : BaseModel {
+  public class Administrator : BaseModel {
 
-    public Admin() : base() { }
+    public Administrator() : base() { }
 
-    public Admin(string name, int? age): base() {
+    public Administrator(string name, int? age): base() {
       this.name = name;
       this.age = age;
     }
