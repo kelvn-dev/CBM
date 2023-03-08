@@ -1,33 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Drawing;
 
 namespace CBM {
   public static class Constant {
 
+    // Font
+    public const string FONT_FAMILY = "Poppins";
+    public const int NORMAL_FONT_SIZE = 12;
+
     public const string PLACEHOLDER_SEARCH_TXT = "Search...";
 
-    // INNER FORM
-    public const int INNER_FORM_WIDTH = 1136;
-    public const int INNER_FORM_HEIGHT = 683;
-    public const int INNER_FORM_LEFT = 288;
-    public const int INNER_FORM_TOP = 252;
-    public const int INNER_FORM_PADDING_TOP = 16;
-    public const int INNER_FORM_PADDING_BOTTOM = 16;
-    public const int INNER_FORM_PADDING_LEFT = 16;
-    public const int INNER_FORM_PADDING_RIGHT = 16;
-    public const string INNER_FORM_BACKGROUND = "#FFFFFF";
-    //public const string INNER_FORM_BORDER_RADIUS = "2px";
+    // Hex Color
+    public const string WHITE_COLOR = "#FFFFFF";
+    public const string RED_COLOR = "#EE1B24";
+    public const string GRAY_COLOR = "#D9D9D9";
+    public const string PLACEHOLDER_COLOR = "#c3c3c3";
+    public const string BLACK_COLOR = "#000000";
 
-    // Search
-    public const int SEARCH_TXT_WIDTH = 40;
-    public const int SEARCH_TXT_HEIGHT = 36;
-    public const int SEARCH_TXT_PADDING = 4;
-    public const string SEARCH_TXT_BACKGROUND = "FFFFFF";
-    public const string SEARCH_TXT_BORDER = "1px solid #D9D9D9";
-    public const int SEARCH_TXT_BORDER_RADIUS = 99;
+    // Border size
+    public const int MIN_BORDER_SIZE = 1;
 
+    // Border-radius
+    public const int MIN_BORDER_RADIUS = 2;
   }
 }

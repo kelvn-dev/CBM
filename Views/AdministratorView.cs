@@ -87,26 +87,6 @@ namespace CBM.Views {
       set => _orderDirection = value;
     }
 
-    public void CssForm() {
-      //this.Width = Constant.INNER_FORM_WIDTH;
-      //this.Height = Constant.INNER_FORM_HEIGHT;
-      this.Padding = new Padding(
-          left: Constant.INNER_FORM_PADDING_LEFT,
-          top: Constant.INNER_FORM_PADDING_TOP,
-          right: Constant.INNER_FORM_PADDING_RIGHT,
-          bottom: Constant.INNER_FORM_PADDING_BOTTOM
-        );
-      this.BackColor = Color.FromName(Constant.INNER_FORM_BACKGROUND);
-    }
-
-    public void CssSearch() {
-      this.searchTxt.Width = Constant.SEARCH_TXT_WIDTH;
-      this.searchTxt.Height = Constant.SEARCH_TXT_HEIGHT;
-      this.searchTxt.Padding = new Padding(Constant.SEARCH_TXT_PADDING);
-      this.searchTxt.BackColor = Color.FromName(Constant.SEARCH_TXT_BACKGROUND);
-      //this.searchTxt.bor
-    }
-
     public AdministratorView() {
       InitializeComponent();
       tabControl.TabPages.Remove(detailTab);

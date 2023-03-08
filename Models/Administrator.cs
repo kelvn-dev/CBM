@@ -17,14 +17,14 @@ namespace CBM.Models {
     private int? _age;
 
     [Required(AllowEmptyStrings = false, ErrorMessage = "Required field")]
-    [DisplayName("NAME")]
+    [DisplayName("Name")]
     public string name {
       get => _name;
       set { _name = value; }
     }
 
     [RegularExpression("^[0-9]+$", ErrorMessage = "Invalid number")]
-    [DisplayName("AGE")]
+    [DisplayName("Age")]
     public int? age {
       get => _age;
       set => _age = value;

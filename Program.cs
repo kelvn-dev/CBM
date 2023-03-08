@@ -14,9 +14,10 @@ namespace CBM {
     static void Main() {
       Application.EnableVisualStyles();
       Application.SetCompatibleTextRenderingDefault(false);
-      AdministratorView<Administrator> view = new AdministratorView<Administrator>();
-      AdministratorPresenter presenter = new AdministratorPresenter(view);
-      Application.Run(view);
+      //AdministratorView<Administrator> view = new AdministratorView<Administrator>();
+      //AdministratorPresenter presenter = new AdministratorPresenter(view);
+
+      Application.Run(new Base());
     }
   }
 }

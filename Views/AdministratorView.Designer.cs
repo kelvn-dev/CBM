@@ -44,6 +44,7 @@ namespace CBM.Views {
       this.saveBtn = new MetroFramework.Controls.MetroButton();
       this.ageTxt = new System.Windows.Forms.NumericUpDown();
       this.nameTxt = new MetroFramework.Controls.MetroTextBox();
+      this.searchTextBox1 = new CBM.Customs.SearchTextBox();
       this.tabControl.SuspendLayout();
       this.listingTab.SuspendLayout();
       this.midPanel.SuspendLayout();
@@ -60,10 +61,10 @@ namespace CBM.Views {
       this.tabControl.Controls.Add(this.listingTab);
       this.tabControl.Controls.Add(this.detailTab);
       this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.tabControl.Location = new System.Drawing.Point(0, 0);
+      this.tabControl.Location = new System.Drawing.Point(20, 60);
       this.tabControl.Name = "tabControl";
       this.tabControl.SelectedIndex = 0;
-      this.tabControl.Size = new System.Drawing.Size(1343, 866);
+      this.tabControl.Size = new System.Drawing.Size(1303, 786);
       this.tabControl.Style = MetroFramework.MetroColorStyle.White;
       this.tabControl.TabIndex = 0;
       this.tabControl.UseSelectable = true;
@@ -78,7 +79,7 @@ namespace CBM.Views {
       this.listingTab.HorizontalScrollbarSize = 10;
       this.listingTab.Location = new System.Drawing.Point(4, 41);
       this.listingTab.Name = "listingTab";
-      this.listingTab.Size = new System.Drawing.Size(1335, 821);
+      this.listingTab.Size = new System.Drawing.Size(1295, 741);
       this.listingTab.TabIndex = 0;
       this.listingTab.Text = "metroTabPage1";
       this.listingTab.VerticalScrollbarBarColor = true;
@@ -94,7 +95,7 @@ namespace CBM.Views {
       this.midPanel.HorizontalScrollbarSize = 10;
       this.midPanel.Location = new System.Drawing.Point(0, 92);
       this.midPanel.Name = "midPanel";
-      this.midPanel.Size = new System.Drawing.Size(1335, 660);
+      this.midPanel.Size = new System.Drawing.Size(1295, 580);
       this.midPanel.TabIndex = 13;
       this.midPanel.VerticalScrollbarBarColor = true;
       this.midPanel.VerticalScrollbarHighlightOnWheel = false;
@@ -108,7 +109,7 @@ namespace CBM.Views {
       this.administratorList.Name = "administratorList";
       this.administratorList.RowHeadersWidth = 82;
       this.administratorList.RowTemplate.Height = 33;
-      this.administratorList.Size = new System.Drawing.Size(1335, 660);
+      this.administratorList.Size = new System.Drawing.Size(1295, 580);
       this.administratorList.TabIndex = 2;
       // 
       // bottomPanel
@@ -120,9 +121,9 @@ namespace CBM.Views {
       this.bottomPanel.HorizontalScrollbarBarColor = true;
       this.bottomPanel.HorizontalScrollbarHighlightOnWheel = false;
       this.bottomPanel.HorizontalScrollbarSize = 10;
-      this.bottomPanel.Location = new System.Drawing.Point(0, 752);
+      this.bottomPanel.Location = new System.Drawing.Point(0, 672);
       this.bottomPanel.Name = "bottomPanel";
-      this.bottomPanel.Size = new System.Drawing.Size(1335, 69);
+      this.bottomPanel.Size = new System.Drawing.Size(1295, 69);
       this.bottomPanel.TabIndex = 12;
       this.bottomPanel.VerticalScrollbarBarColor = true;
       this.bottomPanel.VerticalScrollbarHighlightOnWheel = false;
@@ -131,7 +132,7 @@ namespace CBM.Views {
       // prePageBtn
       // 
       this.prePageBtn.Anchor = System.Windows.Forms.AnchorStyles.None;
-      this.prePageBtn.Location = new System.Drawing.Point(482, 0);
+      this.prePageBtn.Location = new System.Drawing.Point(462, 0);
       this.prePageBtn.Name = "prePageBtn";
       this.prePageBtn.Size = new System.Drawing.Size(116, 69);
       this.prePageBtn.TabIndex = 8;
@@ -142,7 +143,7 @@ namespace CBM.Views {
       // 
       this.pageLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
       this.pageLabel.AutoSize = true;
-      this.pageLabel.Location = new System.Drawing.Point(654, 28);
+      this.pageLabel.Location = new System.Drawing.Point(634, 28);
       this.pageLabel.Name = "pageLabel";
       this.pageLabel.Size = new System.Drawing.Size(36, 19);
       this.pageLabel.TabIndex = 10;
@@ -151,7 +152,7 @@ namespace CBM.Views {
       // nextPageBtn
       // 
       this.nextPageBtn.Anchor = System.Windows.Forms.AnchorStyles.None;
-      this.nextPageBtn.Location = new System.Drawing.Point(747, 0);
+      this.nextPageBtn.Location = new System.Drawing.Point(727, 0);
       this.nextPageBtn.Name = "nextPageBtn";
       this.nextPageBtn.Size = new System.Drawing.Size(116, 69);
       this.nextPageBtn.TabIndex = 9;
@@ -160,6 +161,7 @@ namespace CBM.Views {
       // 
       // topPanel
       // 
+      this.topPanel.Controls.Add(this.searchTextBox1);
       this.topPanel.Controls.Add(this.updateBtn);
       this.topPanel.Controls.Add(this.createBtn);
       this.topPanel.Controls.Add(this.deleteBtn);
@@ -172,7 +174,7 @@ namespace CBM.Views {
       this.topPanel.Location = new System.Drawing.Point(0, 0);
       this.topPanel.Name = "topPanel";
       this.topPanel.Padding = new System.Windows.Forms.Padding(10);
-      this.topPanel.Size = new System.Drawing.Size(1335, 92);
+      this.topPanel.Size = new System.Drawing.Size(1295, 92);
       this.topPanel.TabIndex = 11;
       this.topPanel.VerticalScrollbarBarColor = true;
       this.topPanel.VerticalScrollbarHighlightOnWheel = false;
@@ -181,7 +183,7 @@ namespace CBM.Views {
       // updateBtn
       // 
       this.updateBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-      this.updateBtn.Location = new System.Drawing.Point(1052, 10);
+      this.updateBtn.Location = new System.Drawing.Point(1012, 10);
       this.updateBtn.Name = "updateBtn";
       this.updateBtn.Size = new System.Drawing.Size(116, 60);
       this.updateBtn.TabIndex = 5;
@@ -191,7 +193,7 @@ namespace CBM.Views {
       // createBtn
       // 
       this.createBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-      this.createBtn.Location = new System.Drawing.Point(891, 10);
+      this.createBtn.Location = new System.Drawing.Point(851, 10);
       this.createBtn.Margin = new System.Windows.Forms.Padding(3, 3, 100, 3);
       this.createBtn.Name = "createBtn";
       this.createBtn.Size = new System.Drawing.Size(116, 60);
@@ -202,7 +204,7 @@ namespace CBM.Views {
       // deleteBtn
       // 
       this.deleteBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-      this.deleteBtn.Location = new System.Drawing.Point(1209, 10);
+      this.deleteBtn.Location = new System.Drawing.Point(1169, 10);
       this.deleteBtn.Name = "deleteBtn";
       this.deleteBtn.Size = new System.Drawing.Size(116, 60);
       this.deleteBtn.TabIndex = 3;
@@ -215,7 +217,7 @@ namespace CBM.Views {
       // 
       // 
       this.searchTxt.CustomButton.Image = null;
-      this.searchTxt.CustomButton.Location = new System.Drawing.Point(345, 2);
+      this.searchTxt.CustomButton.Location = new System.Drawing.Point(185, 2);
       this.searchTxt.CustomButton.Name = "";
       this.searchTxt.CustomButton.Size = new System.Drawing.Size(67, 67);
       this.searchTxt.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
@@ -235,7 +237,7 @@ namespace CBM.Views {
       this.searchTxt.SelectionLength = 0;
       this.searchTxt.SelectionStart = 0;
       this.searchTxt.ShortcutsEnabled = true;
-      this.searchTxt.Size = new System.Drawing.Size(415, 72);
+      this.searchTxt.Size = new System.Drawing.Size(255, 72);
       this.searchTxt.TabIndex = 2;
       this.searchTxt.Text = "metroTextBox1";
       this.searchTxt.UseSelectable = true;
@@ -263,7 +265,7 @@ namespace CBM.Views {
       this.detailTab.HorizontalScrollbarSize = 10;
       this.detailTab.Location = new System.Drawing.Point(4, 41);
       this.detailTab.Name = "detailTab";
-      this.detailTab.Size = new System.Drawing.Size(1335, 821);
+      this.detailTab.Size = new System.Drawing.Size(1295, 741);
       this.detailTab.TabIndex = 1;
       this.detailTab.Text = "metroTabPage2";
       this.detailTab.VerticalScrollbarBarColor = true;
@@ -333,7 +335,6 @@ namespace CBM.Views {
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.ClientSize = new System.Drawing.Size(1343, 866);
       this.Controls.Add(this.tabControl);
-      this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
       this.Name = "AdministratorView";
       this.Text = "AdministratorView";
       this.tabControl.ResumeLayout(false);
@@ -370,5 +371,6 @@ namespace CBM.Views {
     private MetroFramework.Controls.MetroPanel midPanel;
     private System.Windows.Forms.DataGridView administratorList;
     private MetroFramework.Controls.MetroPanel bottomPanel;
+    private Customs.SearchTextBox searchTextBox1;
   }
 }
