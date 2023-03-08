@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using CBM.Customs;
 using System.Windows.Forms;
+using FontAwesome.Sharp;
 
 namespace CBM.Utilities {
   public class UserControlUtils {
@@ -42,6 +43,14 @@ namespace CBM.Utilities {
       button.BorderRadius = Constant.MIN_BORDER_RADIUS;
       button.Font = new Font(Constant.FONT_FAMILY, Constant.NORMAL_FONT_SIZE);
       button.Text = "Cancel";
+    }
+
+    public static void CssClickedTabButton(CBMButton button) {
+      button.BackColor = ColorTranslator.FromHtml(Constant.BOLD_BG_COLOR);
+      button.ForeColor = Color.Black;
+      button.BorderSize = 3;
+      button.BorderColor = ColorTranslator.FromHtml(Constant.BG_COLOR);
+      button.BorderRadius = 2;
     }
 
     public static void CssDatagridView(DataGridView dataGridView) {
@@ -95,6 +104,16 @@ namespace CBM.Utilities {
       btn.UseColumnTextForButtonValue= true;
       dataGridView.Columns.Add(btn);
       
+    }
+
+    public static void CssIconButton(IconButton iconButton, Color backColor, Color color, int size = Constant.NORMAL_ICON_SIZE) {
+      iconButton.FlatStyle = FlatStyle.Flat;
+      iconButton.FlatAppearance.BorderSize = 0;
+      iconButton.BackColor = backColor;
+      iconButton.ForeColor = color;
+      iconButton.IconColor = iconButton.ForeColor;
+      iconButton.IconSize = size;
+      iconButton.Font = new Font(Constant.FONT_FAMILY, Constant.NORMAL_FONT_SIZE, FontStyle.Regular);
     }
   }
 }

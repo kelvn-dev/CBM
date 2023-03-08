@@ -17,7 +17,7 @@ namespace CBM {
       //AdministratorView<Administrator> view = new AdministratorView<Administrator>();
       //AdministratorPresenter presenter = new AdministratorPresenter(view);
 
-      Application.Run(new Base());
+      Application.Run(new CommonView());
     }
   }
 }

@@ -39,6 +39,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="CBM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+    <Reference Include="FontAwesome.Sharp, Version=6.3.0.0, Culture=neutral, PublicKeyToken=d16d1e4e568ec10f, processorArchitecture=MSIL">
+      <HintPath>packages\FontAwesome.Sharp.6.3.0\lib\net48\FontAwesome.Sharp.dll</HintPath>
+    </Reference>
     <Reference Include="MetroFramework, Version=1.4.0.0, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
       <HintPath>packages\MetroModernUI.1.4.0.0\lib\net\MetroFramework.dll</HintPath>
     </Reference>
@@ -48,10 +51,13 @@
     <Reference Include="MetroFramework.Fonts, Version=1.4.0.0, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
       <HintPath>packages\MetroModernUI.1.4.0.0\lib\net\MetroFramework.Fonts.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -61,6 +67,7 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Constant.cs" />
@@ -98,11 +105,11 @@
     <Compile Include="Views\AdministratorView.Designer.cs">
       <DependentUpon>AdministratorView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\Base.cs">
+    <Compile Include="Views\CommonView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\Base.Designer.cs">
-      <DependentUpon>Base.cs</DependentUpon>
+    <Compile Include="Views\CommonView.Designer.cs">
+      <DependentUpon>CommonView.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Customs\CBMTxt.resx">
       <DependentUpon>CBMTxt.cs</DependentUpon>
@@ -118,12 +125,13 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="Views\AdministratorView.resx">
       <DependentUpon>AdministratorView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\Base.resx">
-      <DependentUpon>Base.cs</DependentUpon>
+    <EmbeddedResource Include="Views\CommonView.resx">
+      <DependentUpon>CommonView.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -139,6 +147,8 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Assets\cbm_logo.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
