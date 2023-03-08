@@ -48,7 +48,7 @@ namespace CBM.Utilities {
     public static void CssClickedTabButton(CBMButton button) {
       button.BackColor = ColorTranslator.FromHtml(Constant.BOLD_BG_COLOR);
       button.ForeColor = Color.Black;
-      button.BorderSize = 3;
+      button.BorderSize = 6;
       button.BorderColor = ColorTranslator.FromHtml(Constant.BG_COLOR);
       button.BorderRadius = 2;
     }

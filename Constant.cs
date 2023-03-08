@@ -16,6 +16,9 @@ namespace CBM {
     public const string YELLO_COLOR = "#f8ce52";
     public const string GREEN_COLOR = "#5fcf65";
     public const string GRAY_COLOR = "#D9D9D9";
+    public const string SOFT_GRAY_COLOR = "#f0f0f0";
+    public const string BOLD_GRAY_COLOR = "#989898";
+    public const string DARK_BLUE_COLOR = "#001529";
     public const string PLACEHOLDER_COLOR = "#c3c3c3";
     public const string BLACK_COLOR = "#000000";
     public const string ICON_COLOR = "#595959";

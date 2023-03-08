@@ -38,7 +38,6 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CBM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
     <Reference Include="FontAwesome.Sharp, Version=6.3.0.0, Culture=neutral, PublicKeyToken=d16d1e4e568ec10f, processorArchitecture=MSIL">
       <HintPath>packages\FontAwesome.Sharp.6.3.0\lib\net48\FontAwesome.Sharp.dll</HintPath>
     </Reference>
@@ -149,6 +148,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\cbm_logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\white-carbuyer-logo.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
