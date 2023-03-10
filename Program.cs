@@ -1,9 +1,7 @@
 ﻿using CBM.Presenters;
 using CBM.Views;
-using CBM.Models;
 using System;
 using System.Windows.Forms;
-using CBM.Models;
 
 namespace CBM {
   internal static class Program {
@@ -14,7 +12,7 @@ namespace CBM {
     static void Main() {
       Application.EnableVisualStyles();
       Application.SetCompatibleTextRenderingDefault(false);
-      //AdministratorView<Administrator> view = new AdministratorView<Administrator>();
+      //AdministratorView view = new AdministratorView();
       //AdministratorPresenter presenter = new AdministratorPresenter(view);
 
       Application.Run(new CommonView());

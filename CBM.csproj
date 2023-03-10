@@ -38,17 +38,26 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Bunifu_UI_v1.52">
+      <HintPath>..\..\Downloads\Bunifu\Bunifu_UI_v1.52.dll</HintPath>
+    </Reference>
+    <Reference Include="FlatButton">
+      <HintPath>..\..\Downloads\JControls\FlatButton.dll</HintPath>
+    </Reference>
     <Reference Include="FontAwesome.Sharp, Version=6.3.0.0, Culture=neutral, PublicKeyToken=d16d1e4e568ec10f, processorArchitecture=MSIL">
       <HintPath>packages\FontAwesome.Sharp.6.3.0\lib\net48\FontAwesome.Sharp.dll</HintPath>
     </Reference>
-    <Reference Include="MetroFramework, Version=1.4.0.0, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
-      <HintPath>packages\MetroModernUI.1.4.0.0\lib\net\MetroFramework.dll</HintPath>
+    <Reference Include="JMetroTextBox">
+      <HintPath>..\..\Downloads\JControls\JMetroTextBox.dll</HintPath>
     </Reference>
-    <Reference Include="MetroFramework.Design, Version=1.4.0.0, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
-      <HintPath>packages\MetroModernUI.1.4.0.0\lib\net\MetroFramework.Design.dll</HintPath>
+    <Reference Include="JTextBox">
+      <HintPath>..\..\Downloads\JTextBox.dll</HintPath>
     </Reference>
-    <Reference Include="MetroFramework.Fonts, Version=1.4.0.0, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
-      <HintPath>packages\MetroModernUI.1.4.0.0\lib\net\MetroFramework.Fonts.dll</HintPath>
+    <Reference Include="JTextBox2">
+      <HintPath>..\..\Downloads\JControls\JTextBox2.dll</HintPath>
+    </Reference>
+    <Reference Include="JThinButton">
+      <HintPath>..\..\Downloads\JControls\JThinButton.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -56,6 +65,7 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Management" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -73,17 +83,14 @@
     <Compile Include="Customs\CBMButton.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Customs\CBMTxt.cs">
+    <Compile Include="Customs\CBMPictureBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Customs\CBMTextbox.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Customs\CBMTxt.Designer.cs">
-      <DependentUpon>CBMTxt.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Customs\SearchTextBox.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Customs\SearchTextBox.Designer.cs">
-      <DependentUpon>SearchTextBox.cs</DependentUpon>
+    <Compile Include="Customs\CBMTextbox.Designer.cs">
+      <DependentUpon>CBMTextbox.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\Administrator.cs" />
     <Compile Include="Models\BaseModel.cs" />
@@ -94,15 +101,16 @@
     <Compile Include="Services\BaseService.cs" />
     <Compile Include="Utilities\ConnectionFactory.cs" />
     <Compile Include="Enum.cs" />
+    <Compile Include="Utilities\EntityValidator.cs" />
     <Compile Include="Utilities\HelperUtils.cs" />
     <Compile Include="Utilities\ModelValidation.cs" />
     <Compile Include="Utilities\TimeUtils.cs" />
     <Compile Include="Utilities\UserControlUtils.cs" />
-    <Compile Include="Views\AdministratorView.cs">
+    <Compile Include="Views\AdministratorForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\AdministratorView.Designer.cs">
-      <DependentUpon>AdministratorView.cs</DependentUpon>
+    <Compile Include="Views\AdministratorForm.Designer.cs">
+      <DependentUpon>AdministratorForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\CommonView.cs">
       <SubType>Form</SubType>
@@ -110,11 +118,14 @@
     <Compile Include="Views\CommonView.Designer.cs">
       <DependentUpon>CommonView.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Customs\CBMTxt.resx">
-      <DependentUpon>CBMTxt.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Customs\SearchTextBox.resx">
-      <DependentUpon>SearchTextBox.cs</DependentUpon>
+    <Compile Include="Views\GroupForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\GroupForm.Designer.cs">
+      <DependentUpon>GroupForm.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Customs\CBMTextbox.resx">
+      <DependentUpon>CBMTextbox.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -126,11 +137,14 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="Views\AdministratorView.resx">
-      <DependentUpon>AdministratorView.cs</DependentUpon>
+    <EmbeddedResource Include="Views\AdministratorForm.resx">
+      <DependentUpon>AdministratorForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\CommonView.resx">
       <DependentUpon>CommonView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\GroupForm.resx">
+      <DependentUpon>GroupForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

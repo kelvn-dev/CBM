@@ -563,6 +563,7 @@
       // 
       // CommonView
       // 
+      this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
       this.ClientSize = new System.Drawing.Size(1564, 1625);
       this.Controls.Add(this.panelForm);
       this.Controls.Add(this.panelBg);

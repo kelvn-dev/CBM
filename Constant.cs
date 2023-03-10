@@ -6,6 +6,8 @@ namespace CBM {
     // Font
     public const string FONT_FAMILY = "Poppins";
     public const int NORMAL_FONT_SIZE = 12;
+    public const int MEDIUM_FONT_SIZE = 14;
+    public const int LARGE_FONT_SIZE = 16;
     public const int NORMAL_ICON_SIZE = 36;
 
     public const string PLACEHOLDER_SEARCH_TXT = "Search...";
@@ -29,6 +31,6 @@ namespace CBM {
     public const int MIN_BORDER_SIZE = 1;
 
     // Border-radius
-    public const int MIN_BORDER_RADIUS = 2;
+    public const int MIN_BORDER_RADIUS = 4;
   }
 }

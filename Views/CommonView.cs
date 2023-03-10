@@ -1,4 +1,5 @@
 ﻿using CBM.Customs;
+using CBM.Presenters;
 using CBM.Utilities;
 using FontAwesome.Sharp;
 using System;
@@ -9,9 +10,7 @@ using System.Windows.Forms;
 namespace CBM.Views {
   public partial class CommonView : Form {
 
-    private IconButton currentTab;
-    private CBMButton currentSubTab;
-    private Form currentChildForm;
+    #region Css
 
     private void CssThis() {
       // Remove header
@@ -84,6 +83,8 @@ namespace CBM.Views {
       label.Font = new Font(Constant.FONT_FAMILY, Constant.NORMAL_FONT_SIZE, FontStyle.Regular);
     }
 
+    #endregion
+
     public CommonView() {
       InitializeComponent();
       CssThis();
@@ -136,74 +137,10 @@ namespace CBM.Views {
       // Hide sub tabs
       hideAllSubTabs();
 
-      // Event
-      closeBtn.Click += CloseForm;
-      restoreBtn.Click += RestoreForm;
-      minBtn.Click += MinimizeForm;
-
-      tabHome.Click += delegate (object sender, EventArgs e) {
-        ActivateTab(sender);
-      };
-      tabAdministrator.Click += delegate (object sender, EventArgs e) {
-        ActivateTab(sender);
-        showSubTab(panelAdministrator);
-      };
-      tabCommonData.Click += delegate (object sender, EventArgs e) {
-        ActivateTab(sender);
-        showSubTab(panelCommonData);
-      };
-      tabAccountManagement.Click += delegate (object sender, EventArgs e) {
-        ActivateTab(sender);
-        showSubTab(panelAccountManagement);
-      };
-      tabUsedCar.Click += delegate (object sender, EventArgs e) {
-        ActivateTab(sender);
-      };
-      tabSetting.Click += delegate (object sender, EventArgs e) {
-        ActivateTab(sender);
-      };
-
-      tabUser.Click += delegate (object sender, EventArgs e) {
-        ActivateSubtab(sender);
-        labelDetail.Text = "Invite and manage all users of the Admin Portal";
-      };
-      tabGroup.Click += delegate (object sender, EventArgs e) {
-        ActivateSubtab(sender);
-        labelDetail.Text = "Create and manage all groups of the Admin Portal";
-      };
-      tabBrand.Click += delegate (object sender, EventArgs e) {
-        ActivateSubtab(sender);
-        labelDetail.Text = "Create and manage all Brands of the Common Data";
-      };
-      tabModelVariant.Click += delegate (object sender, EventArgs e) {
-        ActivateSubtab(sender);
-        labelDetail.Text = "Create and manage all Models & Variants of the Common Data";
-      };
-      tabVehicleType.Click += delegate (object sender, EventArgs e) {
-        ActivateSubtab(sender);
-        labelDetail.Text = "Create and manage all Vehicle Type of the Common Data";
-      };
-      tabFuelType.Click += delegate (object sender, EventArgs e) {
-        ActivateSubtab(sender);
-        labelDetail.Text = "Create and manage all Fuel Type of the Common Data";
-      };
-      tabCoe.Click += delegate (object sender, EventArgs e) {
-        ActivateSubtab(sender);
-        labelDetail.Text = "Create and manage all Coe Category of the Common Data";
-      };
-      tabSubscriptionPlan.Click += delegate (object sender, EventArgs e) {
-        ActivateSubtab(sender);
-        labelDetail.Text = "Create and manage all Subscription Plan of the Common Data";
-      };
-      tabMember.Click += delegate (object sender, EventArgs e) {
-        ActivateSubtab(sender);
-        labelDetail.Text = "Create and manage all Members of CBM";
-      };
-      tabDealership.Click += delegate (object sender, EventArgs e) {
-        ActivateSubtab(sender);
-        labelDetail.Text = "Create and manage all Dealerships of CBM";
-      };
+      AssociateEvents();
     }
+
+    #region Common
 
     private void hideAllSubTabs() {
       panelAdministrator.Visible = false;
@@ -253,6 +190,85 @@ namespace CBM.Views {
       }
     }
 
+    #endregion
+
+    #region Events
+
+    private void AssociateEvents() {
+      closeBtn.Click += CloseForm;
+      restoreBtn.Click += RestoreForm;
+      minBtn.Click += MinimizeForm;
+
+      // Tabs
+      tabHome.Click += delegate (object sender, EventArgs e) {
+        ActivateTab(sender);
+      };
+      tabAdministrator.Click += delegate (object sender, EventArgs e) {
+        ActivateTab(sender);
+        showSubTab(panelAdministrator);
+      };
+      tabCommonData.Click += delegate (object sender, EventArgs e) {
+        ActivateTab(sender);
+        showSubTab(panelCommonData);
+      };
+      tabAccountManagement.Click += delegate (object sender, EventArgs e) {
+        ActivateTab(sender);
+        showSubTab(panelAccountManagement);
+      };
+      tabUsedCar.Click += delegate (object sender, EventArgs e) {
+        ActivateTab(sender);
+      };
+      tabSetting.Click += delegate (object sender, EventArgs e) {
+        ActivateTab(sender);
+      };
+
+      // Sub tabs
+      tabUser.Click += delegate (object sender, EventArgs e) {
+        ActivateSubtab(sender);
+        labelDetail.Text = "Invite and manage all users of the Admin Portal";
+        AdministratorForm form = new AdministratorForm();
+        new AdministratorPresenter(form);
+        OpenChildForm(form);
+      };
+      tabGroup.Click += delegate (object sender, EventArgs e) {
+        ActivateSubtab(sender);
+        labelDetail.Text = "Create and manage all groups of the Admin Portal";
+        OpenChildForm(new GroupForm());
+      };
+      tabBrand.Click += delegate (object sender, EventArgs e) {
+        ActivateSubtab(sender);
+        labelDetail.Text = "Create and manage all Brands of the Common Data";
+      };
+      tabModelVariant.Click += delegate (object sender, EventArgs e) {
+        ActivateSubtab(sender);
+        labelDetail.Text = "Create and manage all Models & Variants of the Common Data";
+      };
+      tabVehicleType.Click += delegate (object sender, EventArgs e) {
+        ActivateSubtab(sender);
+        labelDetail.Text = "Create and manage all Vehicle Type of the Common Data";
+      };
+      tabFuelType.Click += delegate (object sender, EventArgs e) {
+        ActivateSubtab(sender);
+        labelDetail.Text = "Create and manage all Fuel Type of the Common Data";
+      };
+      tabCoe.Click += delegate (object sender, EventArgs e) {
+        ActivateSubtab(sender);
+        labelDetail.Text = "Create and manage all Coe Category of the Common Data";
+      };
+      tabSubscriptionPlan.Click += delegate (object sender, EventArgs e) {
+        ActivateSubtab(sender);
+        labelDetail.Text = "Create and manage all Subscription Plan of the Common Data";
+      };
+      tabMember.Click += delegate (object sender, EventArgs e) {
+        ActivateSubtab(sender);
+        labelDetail.Text = "Create and manage all Members of CBM";
+      };
+      tabDealership.Click += delegate (object sender, EventArgs e) {
+        ActivateSubtab(sender);
+        labelDetail.Text = "Create and manage all Dealerships of CBM";
+      };
+    }
+
     //Drag Form
     [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
     private extern static void ReleaseCapture();
@@ -293,5 +309,15 @@ namespace CBM.Views {
     private void MinimizeForm(object sender, EventArgs e) {
       WindowState = FormWindowState.Minimized;
     }
+
+    #endregion
+
+    #region Variables
+
+    private IconButton currentTab;
+    private CBMButton currentSubTab;
+    private Form currentChildForm;
+
+    #endregion
   }
 }
