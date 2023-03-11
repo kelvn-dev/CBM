@@ -166,5 +166,10 @@
   <ItemGroup>
     <None Include="Assets\white-carbuyer-logo.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\error.ico" />
+    <None Include="Resources\trash-icon-14-48.ico" />
+    <None Include="Resources\edit.ico" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -2,6 +2,7 @@
 
 namespace CBM {
   public static class Constant {
+    public const string PLACEHOLDER_SEARCH_TXT = "Search....";
 
     // Font
     public const string FONT_FAMILY = "Poppins";
@@ -9,14 +10,14 @@ namespace CBM {
     public const int MEDIUM_FONT_SIZE = 14;
     public const int LARGE_FONT_SIZE = 16;
     public const int NORMAL_ICON_SIZE = 36;
-
-    public const string PLACEHOLDER_SEARCH_TXT = "Search...";
+    public const int MEDIUM_ICON_SIZE = 46;
 
     // Hex Color
     public const string WHITE_COLOR = "#FFFFFF";
     public const string RED_COLOR = "#EE1B24";
     public const string YELLO_COLOR = "#f8ce52";
     public const string GREEN_COLOR = "#5fcf65";
+    public const string BLUE_COLOR = "#267cb5";
     public const string GRAY_COLOR = "#D9D9D9";
     public const string SOFT_GRAY_COLOR = "#f0f0f0";
     public const string BOLD_GRAY_COLOR = "#989898";
@@ -32,5 +33,6 @@ namespace CBM {
 
     // Border-radius
     public const int MIN_BORDER_RADIUS = 4;
+    public const int MAX_BORDER_RADIUS = 33;
   }
 }

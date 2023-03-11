@@ -36,7 +36,7 @@
       this.pictureBox1 = new System.Windows.Forms.PictureBox();
       this.leftPanelShadow = new System.Windows.Forms.Panel();
       this.panelSideBar = new System.Windows.Forms.Panel();
-      this.tabSetting = new FontAwesome.Sharp.IconButton();
+      this.tabBidding = new FontAwesome.Sharp.IconButton();
       this.tabUsedCar = new FontAwesome.Sharp.IconButton();
       this.panelAccountManagement = new System.Windows.Forms.Panel();
       this.tabDealership = new CBM.Customs.CBMButton();
@@ -63,6 +63,10 @@
       this.panelBg = new System.Windows.Forms.Panel();
       this.leftPanelBg = new System.Windows.Forms.Panel();
       this.panelForm = new System.Windows.Forms.Panel();
+      this.tabCampaign = new FontAwesome.Sharp.IconButton();
+      this.tabBroadcast = new FontAwesome.Sharp.IconButton();
+      this.tabReportManagement = new FontAwesome.Sharp.IconButton();
+      this.tabSetting = new FontAwesome.Sharp.IconButton();
       this.headerBar.SuspendLayout();
       this.panelHeader.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -209,12 +213,16 @@
       this.leftPanelShadow.Dock = System.Windows.Forms.DockStyle.Left;
       this.leftPanelShadow.Location = new System.Drawing.Point(500, 188);
       this.leftPanelShadow.Name = "leftPanelShadow";
-      this.leftPanelShadow.Size = new System.Drawing.Size(5, 1437);
+      this.leftPanelShadow.Size = new System.Drawing.Size(5, 2469);
       this.leftPanelShadow.TabIndex = 5;
       // 
       // panelSideBar
       // 
       this.panelSideBar.Controls.Add(this.tabSetting);
+      this.panelSideBar.Controls.Add(this.tabReportManagement);
+      this.panelSideBar.Controls.Add(this.tabBroadcast);
+      this.panelSideBar.Controls.Add(this.tabCampaign);
+      this.panelSideBar.Controls.Add(this.tabBidding);
       this.panelSideBar.Controls.Add(this.tabUsedCar);
       this.panelSideBar.Controls.Add(this.panelAccountManagement);
       this.panelSideBar.Controls.Add(this.tabAccountManagement);
@@ -226,21 +234,21 @@
       this.panelSideBar.Dock = System.Windows.Forms.DockStyle.Left;
       this.panelSideBar.Location = new System.Drawing.Point(0, 188);
       this.panelSideBar.Name = "panelSideBar";
-      this.panelSideBar.Size = new System.Drawing.Size(500, 1437);
+      this.panelSideBar.Size = new System.Drawing.Size(500, 2469);
       this.panelSideBar.TabIndex = 4;
       // 
-      // tabSetting
+      // tabBidding
       // 
-      this.tabSetting.Dock = System.Windows.Forms.DockStyle.Top;
-      this.tabSetting.IconChar = FontAwesome.Sharp.IconChar.Gear;
-      this.tabSetting.IconColor = System.Drawing.Color.Black;
-      this.tabSetting.IconFont = FontAwesome.Sharp.IconFont.Auto;
-      this.tabSetting.Location = new System.Drawing.Point(0, 1500);
-      this.tabSetting.Name = "tabSetting";
-      this.tabSetting.Size = new System.Drawing.Size(500, 100);
-      this.tabSetting.TabIndex = 8;
-      this.tabSetting.Text = "Settings";
-      this.tabSetting.UseVisualStyleBackColor = true;
+      this.tabBidding.Dock = System.Windows.Forms.DockStyle.Top;
+      this.tabBidding.IconChar = FontAwesome.Sharp.IconChar.ClipboardList;
+      this.tabBidding.IconColor = System.Drawing.Color.Black;
+      this.tabBidding.IconFont = FontAwesome.Sharp.IconFont.Auto;
+      this.tabBidding.Location = new System.Drawing.Point(0, 1680);
+      this.tabBidding.Name = "tabBidding";
+      this.tabBidding.Size = new System.Drawing.Size(500, 120);
+      this.tabBidding.TabIndex = 8;
+      this.tabBidding.Text = "Bidding";
+      this.tabBidding.UseVisualStyleBackColor = true;
       // 
       // tabUsedCar
       // 
@@ -248,9 +256,9 @@
       this.tabUsedCar.IconChar = FontAwesome.Sharp.IconChar.Car;
       this.tabUsedCar.IconColor = System.Drawing.Color.Black;
       this.tabUsedCar.IconFont = FontAwesome.Sharp.IconFont.Auto;
-      this.tabUsedCar.Location = new System.Drawing.Point(0, 1400);
+      this.tabUsedCar.Location = new System.Drawing.Point(0, 1560);
       this.tabUsedCar.Name = "tabUsedCar";
-      this.tabUsedCar.Size = new System.Drawing.Size(500, 100);
+      this.tabUsedCar.Size = new System.Drawing.Size(500, 120);
       this.tabUsedCar.TabIndex = 7;
       this.tabUsedCar.Text = "Used Cars";
       this.tabUsedCar.UseVisualStyleBackColor = true;
@@ -260,9 +268,9 @@
       this.panelAccountManagement.Controls.Add(this.tabDealership);
       this.panelAccountManagement.Controls.Add(this.tabMember);
       this.panelAccountManagement.Dock = System.Windows.Forms.DockStyle.Top;
-      this.panelAccountManagement.Location = new System.Drawing.Point(0, 1200);
+      this.panelAccountManagement.Location = new System.Drawing.Point(0, 1320);
       this.panelAccountManagement.Name = "panelAccountManagement";
-      this.panelAccountManagement.Size = new System.Drawing.Size(500, 200);
+      this.panelAccountManagement.Size = new System.Drawing.Size(500, 240);
       this.panelAccountManagement.TabIndex = 6;
       // 
       // tabDealership
@@ -273,9 +281,9 @@
       this.tabDealership.Dock = System.Windows.Forms.DockStyle.Top;
       this.tabDealership.FlatAppearance.BorderSize = 0;
       this.tabDealership.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-      this.tabDealership.Location = new System.Drawing.Point(0, 100);
+      this.tabDealership.Location = new System.Drawing.Point(0, 120);
       this.tabDealership.Name = "tabDealership";
-      this.tabDealership.Size = new System.Drawing.Size(500, 100);
+      this.tabDealership.Size = new System.Drawing.Size(500, 120);
       this.tabDealership.TabIndex = 3;
       this.tabDealership.Text = "Dealerships";
       this.tabDealership.UseVisualStyleBackColor = true;
@@ -290,7 +298,7 @@
       this.tabMember.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
       this.tabMember.Location = new System.Drawing.Point(0, 0);
       this.tabMember.Name = "tabMember";
-      this.tabMember.Size = new System.Drawing.Size(500, 100);
+      this.tabMember.Size = new System.Drawing.Size(500, 120);
       this.tabMember.TabIndex = 2;
       this.tabMember.Text = "Members";
       this.tabMember.UseVisualStyleBackColor = true;
@@ -298,12 +306,12 @@
       // tabAccountManagement
       // 
       this.tabAccountManagement.Dock = System.Windows.Forms.DockStyle.Top;
-      this.tabAccountManagement.IconChar = FontAwesome.Sharp.IconChar.PeopleGroup;
+      this.tabAccountManagement.IconChar = FontAwesome.Sharp.IconChar.UserPlus;
       this.tabAccountManagement.IconColor = System.Drawing.Color.Black;
       this.tabAccountManagement.IconFont = FontAwesome.Sharp.IconFont.Auto;
-      this.tabAccountManagement.Location = new System.Drawing.Point(0, 1100);
+      this.tabAccountManagement.Location = new System.Drawing.Point(0, 1200);
       this.tabAccountManagement.Name = "tabAccountManagement";
-      this.tabAccountManagement.Size = new System.Drawing.Size(500, 100);
+      this.tabAccountManagement.Size = new System.Drawing.Size(500, 120);
       this.tabAccountManagement.TabIndex = 5;
       this.tabAccountManagement.Text = "Account Management";
       this.tabAccountManagement.UseVisualStyleBackColor = true;
@@ -317,7 +325,7 @@
       this.panelCommonData.Controls.Add(this.tabModelVariant);
       this.panelCommonData.Controls.Add(this.tabBrand);
       this.panelCommonData.Dock = System.Windows.Forms.DockStyle.Top;
-      this.panelCommonData.Location = new System.Drawing.Point(0, 500);
+      this.panelCommonData.Location = new System.Drawing.Point(0, 600);
       this.panelCommonData.Name = "panelCommonData";
       this.panelCommonData.Size = new System.Drawing.Size(500, 600);
       this.panelCommonData.TabIndex = 4;
@@ -330,9 +338,9 @@
       this.tabSubscriptionPlan.Dock = System.Windows.Forms.DockStyle.Top;
       this.tabSubscriptionPlan.FlatAppearance.BorderSize = 0;
       this.tabSubscriptionPlan.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-      this.tabSubscriptionPlan.Location = new System.Drawing.Point(0, 500);
+      this.tabSubscriptionPlan.Location = new System.Drawing.Point(0, 600);
       this.tabSubscriptionPlan.Name = "tabSubscriptionPlan";
-      this.tabSubscriptionPlan.Size = new System.Drawing.Size(500, 100);
+      this.tabSubscriptionPlan.Size = new System.Drawing.Size(500, 123);
       this.tabSubscriptionPlan.TabIndex = 6;
       this.tabSubscriptionPlan.Text = "Subscription Plan";
       this.tabSubscriptionPlan.UseVisualStyleBackColor = true;
@@ -345,9 +353,9 @@
       this.tabCoe.Dock = System.Windows.Forms.DockStyle.Top;
       this.tabCoe.FlatAppearance.BorderSize = 0;
       this.tabCoe.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-      this.tabCoe.Location = new System.Drawing.Point(0, 400);
+      this.tabCoe.Location = new System.Drawing.Point(0, 480);
       this.tabCoe.Name = "tabCoe";
-      this.tabCoe.Size = new System.Drawing.Size(500, 100);
+      this.tabCoe.Size = new System.Drawing.Size(500, 120);
       this.tabCoe.TabIndex = 5;
       this.tabCoe.Text = "COE";
       this.tabCoe.UseVisualStyleBackColor = true;
@@ -360,9 +368,9 @@
       this.tabFuelType.Dock = System.Windows.Forms.DockStyle.Top;
       this.tabFuelType.FlatAppearance.BorderSize = 0;
       this.tabFuelType.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-      this.tabFuelType.Location = new System.Drawing.Point(0, 300);
+      this.tabFuelType.Location = new System.Drawing.Point(0, 360);
       this.tabFuelType.Name = "tabFuelType";
-      this.tabFuelType.Size = new System.Drawing.Size(500, 100);
+      this.tabFuelType.Size = new System.Drawing.Size(500, 120);
       this.tabFuelType.TabIndex = 4;
       this.tabFuelType.Text = "Fuel Type";
       this.tabFuelType.UseVisualStyleBackColor = true;
@@ -375,9 +383,9 @@
       this.tabVehicleType.Dock = System.Windows.Forms.DockStyle.Top;
       this.tabVehicleType.FlatAppearance.BorderSize = 0;
       this.tabVehicleType.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-      this.tabVehicleType.Location = new System.Drawing.Point(0, 200);
+      this.tabVehicleType.Location = new System.Drawing.Point(0, 240);
       this.tabVehicleType.Name = "tabVehicleType";
-      this.tabVehicleType.Size = new System.Drawing.Size(500, 100);
+      this.tabVehicleType.Size = new System.Drawing.Size(500, 120);
       this.tabVehicleType.TabIndex = 3;
       this.tabVehicleType.Text = "Vehicle Type";
       this.tabVehicleType.UseVisualStyleBackColor = true;
@@ -390,9 +398,9 @@
       this.tabModelVariant.Dock = System.Windows.Forms.DockStyle.Top;
       this.tabModelVariant.FlatAppearance.BorderSize = 0;
       this.tabModelVariant.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-      this.tabModelVariant.Location = new System.Drawing.Point(0, 100);
+      this.tabModelVariant.Location = new System.Drawing.Point(0, 120);
       this.tabModelVariant.Name = "tabModelVariant";
-      this.tabModelVariant.Size = new System.Drawing.Size(500, 100);
+      this.tabModelVariant.Size = new System.Drawing.Size(500, 120);
       this.tabModelVariant.TabIndex = 2;
       this.tabModelVariant.Text = "Models && Variants";
       this.tabModelVariant.UseVisualStyleBackColor = true;
@@ -407,7 +415,7 @@
       this.tabBrand.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
       this.tabBrand.Location = new System.Drawing.Point(0, 0);
       this.tabBrand.Name = "tabBrand";
-      this.tabBrand.Size = new System.Drawing.Size(500, 100);
+      this.tabBrand.Size = new System.Drawing.Size(500, 120);
       this.tabBrand.TabIndex = 1;
       this.tabBrand.Text = "Brands";
       this.tabBrand.UseVisualStyleBackColor = true;
@@ -418,9 +426,9 @@
       this.tabCommonData.IconChar = FontAwesome.Sharp.IconChar.CircleInfo;
       this.tabCommonData.IconColor = System.Drawing.Color.Black;
       this.tabCommonData.IconFont = FontAwesome.Sharp.IconFont.Auto;
-      this.tabCommonData.Location = new System.Drawing.Point(0, 400);
+      this.tabCommonData.Location = new System.Drawing.Point(0, 480);
       this.tabCommonData.Name = "tabCommonData";
-      this.tabCommonData.Size = new System.Drawing.Size(500, 100);
+      this.tabCommonData.Size = new System.Drawing.Size(500, 120);
       this.tabCommonData.TabIndex = 3;
       this.tabCommonData.Text = "Common Data";
       this.tabCommonData.UseVisualStyleBackColor = true;
@@ -430,9 +438,9 @@
       this.panelAdministrator.Controls.Add(this.tabGroup);
       this.panelAdministrator.Controls.Add(this.tabUser);
       this.panelAdministrator.Dock = System.Windows.Forms.DockStyle.Top;
-      this.panelAdministrator.Location = new System.Drawing.Point(0, 200);
+      this.panelAdministrator.Location = new System.Drawing.Point(0, 240);
       this.panelAdministrator.Name = "panelAdministrator";
-      this.panelAdministrator.Size = new System.Drawing.Size(500, 200);
+      this.panelAdministrator.Size = new System.Drawing.Size(500, 240);
       this.panelAdministrator.TabIndex = 2;
       // 
       // tabGroup
@@ -443,9 +451,9 @@
       this.tabGroup.Dock = System.Windows.Forms.DockStyle.Top;
       this.tabGroup.FlatAppearance.BorderSize = 0;
       this.tabGroup.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-      this.tabGroup.Location = new System.Drawing.Point(0, 100);
+      this.tabGroup.Location = new System.Drawing.Point(0, 120);
       this.tabGroup.Name = "tabGroup";
-      this.tabGroup.Size = new System.Drawing.Size(500, 100);
+      this.tabGroup.Size = new System.Drawing.Size(500, 120);
       this.tabGroup.TabIndex = 1;
       this.tabGroup.Text = "Groups";
       this.tabGroup.UseVisualStyleBackColor = true;
@@ -460,7 +468,7 @@
       this.tabUser.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
       this.tabUser.Location = new System.Drawing.Point(0, 0);
       this.tabUser.Name = "tabUser";
-      this.tabUser.Size = new System.Drawing.Size(500, 100);
+      this.tabUser.Size = new System.Drawing.Size(500, 120);
       this.tabUser.TabIndex = 0;
       this.tabUser.Text = "Users";
       this.tabUser.UseVisualStyleBackColor = true;
@@ -471,9 +479,9 @@
       this.tabAdministrator.IconChar = FontAwesome.Sharp.IconChar.UserGroup;
       this.tabAdministrator.IconColor = System.Drawing.Color.Black;
       this.tabAdministrator.IconFont = FontAwesome.Sharp.IconFont.Auto;
-      this.tabAdministrator.Location = new System.Drawing.Point(0, 100);
+      this.tabAdministrator.Location = new System.Drawing.Point(0, 120);
       this.tabAdministrator.Name = "tabAdministrator";
-      this.tabAdministrator.Size = new System.Drawing.Size(500, 100);
+      this.tabAdministrator.Size = new System.Drawing.Size(500, 120);
       this.tabAdministrator.TabIndex = 1;
       this.tabAdministrator.Text = "Administrator";
       this.tabAdministrator.UseVisualStyleBackColor = true;
@@ -486,7 +494,7 @@
       this.tabHome.IconFont = FontAwesome.Sharp.IconFont.Auto;
       this.tabHome.Location = new System.Drawing.Point(0, 0);
       this.tabHome.Name = "tabHome";
-      this.tabHome.Size = new System.Drawing.Size(500, 100);
+      this.tabHome.Size = new System.Drawing.Size(500, 120);
       this.tabHome.TabIndex = 0;
       this.tabHome.Text = "Home";
       this.tabHome.UseVisualStyleBackColor = true;
@@ -550,7 +558,7 @@
       this.leftPanelBg.Dock = System.Windows.Forms.DockStyle.Left;
       this.leftPanelBg.Location = new System.Drawing.Point(505, 397);
       this.leftPanelBg.Name = "leftPanelBg";
-      this.leftPanelBg.Size = new System.Drawing.Size(10, 1228);
+      this.leftPanelBg.Size = new System.Drawing.Size(10, 2260);
       this.leftPanelBg.TabIndex = 9;
       // 
       // panelForm
@@ -558,13 +566,65 @@
       this.panelForm.Dock = System.Windows.Forms.DockStyle.Fill;
       this.panelForm.Location = new System.Drawing.Point(515, 407);
       this.panelForm.Name = "panelForm";
-      this.panelForm.Size = new System.Drawing.Size(1049, 1218);
+      this.panelForm.Size = new System.Drawing.Size(1049, 2250);
       this.panelForm.TabIndex = 11;
+      // 
+      // tabCampaign
+      // 
+      this.tabCampaign.Dock = System.Windows.Forms.DockStyle.Top;
+      this.tabCampaign.IconChar = FontAwesome.Sharp.IconChar.Fire;
+      this.tabCampaign.IconColor = System.Drawing.Color.Black;
+      this.tabCampaign.IconFont = FontAwesome.Sharp.IconFont.Auto;
+      this.tabCampaign.Location = new System.Drawing.Point(0, 1800);
+      this.tabCampaign.Name = "tabCampaign";
+      this.tabCampaign.Size = new System.Drawing.Size(500, 120);
+      this.tabCampaign.TabIndex = 9;
+      this.tabCampaign.Text = "Campaign";
+      this.tabCampaign.UseVisualStyleBackColor = true;
+      // 
+      // tabBroadcast
+      // 
+      this.tabBroadcast.Dock = System.Windows.Forms.DockStyle.Top;
+      this.tabBroadcast.IconChar = FontAwesome.Sharp.IconChar.Podcast;
+      this.tabBroadcast.IconColor = System.Drawing.Color.Black;
+      this.tabBroadcast.IconFont = FontAwesome.Sharp.IconFont.Auto;
+      this.tabBroadcast.Location = new System.Drawing.Point(0, 1920);
+      this.tabBroadcast.Name = "tabBroadcast";
+      this.tabBroadcast.Size = new System.Drawing.Size(500, 120);
+      this.tabBroadcast.TabIndex = 10;
+      this.tabBroadcast.Text = "Broadcast";
+      this.tabBroadcast.UseVisualStyleBackColor = true;
+      // 
+      // tabReportManagement
+      // 
+      this.tabReportManagement.Dock = System.Windows.Forms.DockStyle.Top;
+      this.tabReportManagement.IconChar = FontAwesome.Sharp.IconChar.ChartSimple;
+      this.tabReportManagement.IconColor = System.Drawing.Color.Black;
+      this.tabReportManagement.IconFont = FontAwesome.Sharp.IconFont.Auto;
+      this.tabReportManagement.Location = new System.Drawing.Point(0, 2040);
+      this.tabReportManagement.Name = "tabReportManagement";
+      this.tabReportManagement.Size = new System.Drawing.Size(500, 120);
+      this.tabReportManagement.TabIndex = 11;
+      this.tabReportManagement.Text = "Report Management";
+      this.tabReportManagement.UseVisualStyleBackColor = true;
+      // 
+      // tabSetting
+      // 
+      this.tabSetting.Dock = System.Windows.Forms.DockStyle.Top;
+      this.tabSetting.IconChar = FontAwesome.Sharp.IconChar.Gear;
+      this.tabSetting.IconColor = System.Drawing.Color.Black;
+      this.tabSetting.IconFont = FontAwesome.Sharp.IconFont.Auto;
+      this.tabSetting.Location = new System.Drawing.Point(0, 2160);
+      this.tabSetting.Name = "tabSetting";
+      this.tabSetting.Size = new System.Drawing.Size(500, 120);
+      this.tabSetting.TabIndex = 12;
+      this.tabSetting.Text = "Settings";
+      this.tabSetting.UseVisualStyleBackColor = true;
       // 
       // CommonView
       // 
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-      this.ClientSize = new System.Drawing.Size(1564, 1625);
+      this.ClientSize = new System.Drawing.Size(1564, 2657);
       this.Controls.Add(this.panelForm);
       this.Controls.Add(this.panelBg);
       this.Controls.Add(this.leftPanelBg);
@@ -613,7 +673,7 @@
     private FontAwesome.Sharp.IconButton iconButtonQuestion;
     private FontAwesome.Sharp.IconButton iconButtonSearch;
     private FontAwesome.Sharp.IconButton iconButtonBell;
-    private FontAwesome.Sharp.IconButton tabSetting;
+    private FontAwesome.Sharp.IconButton tabBidding;
     private FontAwesome.Sharp.IconButton tabUsedCar;
     private System.Windows.Forms.Panel panelAccountManagement;
     private Customs.CBMButton tabDealership;
@@ -630,5 +690,9 @@
     private System.Windows.Forms.Label labelDetail;
     private FontAwesome.Sharp.IconButton iconProfile;
     private FontAwesome.Sharp.IconButton iconNotification;
+    private FontAwesome.Sharp.IconButton tabSetting;
+    private FontAwesome.Sharp.IconButton tabReportManagement;
+    private FontAwesome.Sharp.IconButton tabBroadcast;
+    private FontAwesome.Sharp.IconButton tabCampaign;
   }
 }

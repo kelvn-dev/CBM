@@ -2,14 +2,16 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.SqlClient;
+using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
+using System.Windows.Forms;
 
 namespace CBM.Utilities {
   public class HelperUtils {
@@ -40,6 +42,27 @@ namespace CBM.Utilities {
       return propertyInfos.ToArray();
     }
 
+    public static PropertyInfo GetPropertyByDisplayName<T>(string displayedName) {
+      PropertyInfo[] properties = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance);
+
+      foreach (PropertyInfo property in properties) {
+        DisplayNameAttribute displayAttribute = property.GetCustomAttribute<DisplayNameAttribute>();
+
+        if (displayAttribute != null && displayAttribute.DisplayName == displayedName) {
+          return property;
+        }
+      }
+      return null;
+    }
+
+    public static string GetColumnName(PropertyInfo property) {
+      if (property == null) {
+        return null;
+      }
+      ColumnAttribute columnAttribute = property.GetCustomAttribute<ColumnAttribute>();
+      return columnAttribute != null ? columnAttribute.Name : null;
+    }
+
     public static void MapModelToInsertCommand(BaseModel model, SqlCommand command) {
       string sqlQuery = command.CommandText;
       // INSERT INTO admin (id, name, age) VALUES (@name, @age)
@@ -47,12 +70,13 @@ namespace CBM.Utilities {
       string columns = "(id, created_time, ";
       string values = "(@id, @created_time, ";
 
-      PropertyInfo[]  propertyInfos = GetPublicPropertyInfos(model.GetType());
+      PropertyInfo[] propertyInfos = GetPublicPropertyInfos(model.GetType());
       foreach (PropertyInfo propertyInfo in propertyInfos) {
         ColumnAttribute column = propertyInfo.GetCustomAttribute<ColumnAttribute>();
         if (column != null) {
           string name = column.Name;
-          object value = model[propertyInfo.Name];
+          //object value = model[propertyInfo.Name];
+          object value = model.GetValue(propertyInfo.Name);
           columns += $"{name}, ";
           values += $"@{name}, ";
           command.Parameters.AddWithValue($"@{name}", value == null ? DBNull.Value : value);
@@ -72,9 +96,9 @@ namespace CBM.Utilities {
         ColumnAttribute column = propertyInfo.GetCustomAttribute<ColumnAttribute>();
         if (column != null) {
           string name = column.Name;
-          object value = model[propertyInfo.Name];
+          //object value = model[propertyInfo.Name];
+          object value = model.GetValue(propertyInfo.Name);
           if (value != null) {
-            Console.WriteLine(value);
             sqlQuery += $"{name} = @{name}, ";
             command.Parameters.AddWithValue($"@{name}", value);
             isEmptyModel = false;
@@ -83,6 +107,23 @@ namespace CBM.Utilities {
       }
       // Generate an empty query if there is an empty model
       command.CommandText = isEmptyModel ? "" : $@"{sqlQuery.Remove(sqlQuery.Length - 2)} ";
+    }
+
+    public static ImageFormat GetImageFormat(string filename) {
+      string[] parts = filename.Split('.');
+      string fileExtention = parts[parts.Length - 1];
+      switch (fileExtention) {
+        case "jpg":
+          return ImageFormat.Jpeg;
+        case "jpeg":
+          return ImageFormat.Jpeg;
+        case "png":
+          return ImageFormat.Png;
+        case "gif":
+          return ImageFormat.Gif;
+        default:
+        return null;
+      }
     }
   }
 }

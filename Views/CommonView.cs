@@ -119,6 +119,10 @@ namespace CBM.Views {
       CssTab(tabCommonData);
       CssTab(tabAccountManagement);
       CssTab(tabUsedCar);
+      CssTab(tabBidding);
+      CssTab(tabCampaign);
+      CssTab(tabBroadcast);
+      CssTab(tabReportManagement);
       CssTab(tabSetting);
 
       CssSubTab(panelAdministrator);
@@ -216,6 +220,18 @@ namespace CBM.Views {
         showSubTab(panelAccountManagement);
       };
       tabUsedCar.Click += delegate (object sender, EventArgs e) {
+        ActivateTab(sender);
+      };
+      tabBidding.Click += delegate (object sender, EventArgs e) {
+        ActivateTab(sender);
+      };
+      tabCampaign.Click += delegate (object sender, EventArgs e) {
+        ActivateTab(sender);
+      };
+      tabBroadcast.Click += delegate (object sender, EventArgs e) {
+        ActivateTab(sender);
+      };
+      tabReportManagement.Click += delegate (object sender, EventArgs e) {
         ActivateTab(sender);
       };
       tabSetting.Click += delegate (object sender, EventArgs e) {

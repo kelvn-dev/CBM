@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Reflection;
 
 namespace CBM.Models {
   public class BaseModel: IDataErrorInfo {
@@ -27,6 +28,10 @@ namespace CBM.Models {
           return results.First().ErrorMessage;
         return string.Empty;
       }
+      //set {
+      //  value = value == string.Empty || (object) value == DBNull.Value ? null : value;
+      //  this.GetType().GetProperty(property).SetValue(this, value, null);
+      //}
     }
 
     [Browsable(false)]
@@ -41,26 +46,35 @@ namespace CBM.Models {
           return null;
       }
     }
+    [Browsable(false)]
+    public bool IsValid => string.IsNullOrEmpty(Error);
 
-    public object this[string propertyName] {
-      get { return this.GetType().GetProperty(propertyName).GetValue(this, null); }
-      set {
-        value = value == DBNull.Value ? null : value;
-        this.GetType().GetProperty(propertyName).SetValue(this, value, null);
-      }
+    //public object this[string propertyName] {
+    //  get { return this.GetType().GetProperty(propertyName).GetValue(this, null); }
+    //  set {
+    //    value = value == DBNull.Value ? null : value;
+    //    this.GetType().GetProperty(propertyName).SetValue(this, value, null);
+    //  }
+    //}
+    public object GetValue(string propertyName) {
+      return this.GetType().GetProperty(propertyName).GetValue(this, null);
+    }
+    public void SetValue(string propertyName, object value) {
+      value = value == DBNull.Value ? null : value;
+      this.GetType().GetProperty(propertyName).SetValue(this, value, null);
     }
 
     private Guid _id;
-    private DateTime _createdTime;
+    private DateTime _created_time;
 
     public Guid id {
       get => _id;
       set => _id = value;
     }
 
-    public DateTime? createdTime {
-      get => _createdTime;
-      set => _createdTime = (DateTime) value;
+    public DateTime? created_time {
+      get => _created_time;
+      set => _created_time = (DateTime) value;
     }
   }
 }

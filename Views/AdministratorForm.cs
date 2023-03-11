@@ -1,8 +1,13 @@
 ﻿using CBM.Models;
 using CBM.Utilities;
+using FontAwesome.Sharp;
 using System;
 using System.Drawing;
+using System.IO;
+using System.Text;
+using System.Windows.Data;
 using System.Windows.Forms;
+using static CBM.Enum;
 
 namespace CBM.Views {
   public partial class AdministratorForm : Form {
@@ -12,6 +17,10 @@ namespace CBM.Views {
     private void CssBtn() {
       UserControlUtils.CssCancelBtn(cancelBtn);
       UserControlUtils.CssSaveBtn(saveBtn);
+      UserControlUtils.CssCreateBtn(createBtn);
+      UserControlUtils.CssIconButton(searchBtn, Color.White, ColorTranslator.FromHtml(Constant.PLACEHOLDER_COLOR));
+      UserControlUtils.CssIconButton(prePageBtn, Color.White, ColorTranslator.FromHtml(Constant.BLUE_COLOR), Constant.MEDIUM_ICON_SIZE);
+      UserControlUtils.CssIconButton(nextPageBtn, Color.White, ColorTranslator.FromHtml(Constant.BLUE_COLOR), Constant.MEDIUM_ICON_SIZE);
     }
     private void CssLabel() {
       UserControlUtils.CssInformationLabel(informationLabel);
@@ -20,6 +29,7 @@ namespace CBM.Views {
       UserControlUtils.CssFieldLabel(emailLabel);
       UserControlUtils.CssFieldLabel(phoneLabel);
       UserControlUtils.CssFieldLabel(addressLabel);
+      UserControlUtils.CssPageLabel(pageLabel);
     }
     private void CssTextbox() {
       UserControlUtils.CssTextbox(usernameField, "Enter your username");
@@ -27,78 +37,202 @@ namespace CBM.Views {
       UserControlUtils.CssTextbox(phoneField, "Enter your phone number");
       UserControlUtils.CssTextbox(addressField, "Enter your address");
       UserControlUtils.CssTextbox(zipcodeField, "Zip Code");
+      UserControlUtils.CssSearchTextbox(searchField);
     }
     private void CssIconPictureBox() {
       avatarPictureBox.Click += UploadAvatar;
       avatarPictureBox.IconColor = ColorTranslator.FromHtml("#183153");
       avatarPictureBox.ForeColor = ColorTranslator.FromHtml("#183153");
     }
+    private void CssTabControl() {
+      tabControl.TabPages.Remove(detailTab);
+      tabControl.Appearance = TabAppearance.FlatButtons;
+      tabControl.ItemSize = new Size(0, 1);
+      tabControl.SizeMode = TabSizeMode.Fixed;
+      listingTab.BackColor = Color.White;
+      detailTab.BackColor = Color.White;
+    }
+    private void CssDatagridView() {
+      UserControlUtils.CssDatagridView(dataGridView);
+    }
 
     #endregion
 
     public AdministratorForm() {
       InitializeComponent();
+      currentPage = 1;
 
       CssBtn();
       CssLabel();
       CssTextbox();
       CssIconPictureBox();
+      CssTabControl();
+      CssDatagridView();
 
       AssociateEvents();
-      BindingSource bindingSource = new BindingSource();
-      bindingSource.DataSource = new Administrator();
-      errorProvider.DataSource = bindingSource;
+      AssociateValidation();
     }
 
     #region Common
 
-    //private void SwitchToListingTab() {
-    //  tabControl.TabPages.Remove(detailTab);
-    //  tabControl.TabPages.Add(listingTab);
-    //}
+    private void SwitchToListingTab() {
+      tabControl.TabPages.Remove(detailTab);
+      tabControl.TabPages.Add(listingTab);
+    }
 
-    //private void SwitchToDetailTab() {
-    //  tabControl.TabPages.Remove(listingTab);
-    //  tabControl.TabPages.Add(detailTab);
-    //}
+    private void SwitchToDetailTab() {
+      tabControl.TabPages.Remove(listingTab);
+      tabControl.TabPages.Add(detailTab);
+    }
+
+    public void MapDataSource(BindingSource bindingSource) {
+      dataGridView.DataSource = bindingSource;
+      dataGridView.Columns["id"].Visible = false;
+      dataGridView.Columns["created_time"].Visible = false;
+      dataGridView.Columns["avatar"].Visible = false;
+      UserControlUtils.AjustHeightAutomatically(dataGridView);
+      UserControlUtils.AddActionColumns(dataGridView);
+    }
+
+    #endregion
+
+    #region Validation
+
+    private void AssociateValidation() {
+      errorProvider.DataSource = validationBindingSource;
+
+      usernameField.DataBindings.Add("Texts", errorProvider.DataSource, "username", true, DataSourceUpdateMode.OnPropertyChanged);
+      emailField.DataBindings.Add("Texts", errorProvider.DataSource, "email", true, DataSourceUpdateMode.OnPropertyChanged);
+      phoneField.DataBindings.Add("Texts", errorProvider.DataSource, "phone", true, DataSourceUpdateMode.OnPropertyChanged);
+
+      errorProvider.SetIconPadding(usernameField, 50);
+      errorProvider.SetIconPadding(emailField, 50);
+      errorProvider.SetIconPadding(phoneField, 50);
+    }
 
     #endregion
 
     #region Events
 
+    public event EventHandler SearchEvent;
+    public event EventHandler CreateEvent;
+    public event EventHandler UpdateEvent;
+    public event EventHandler DeleteEvent;
+    public event EventHandler SaveEvent;
+    public event EventHandler GetPrePageEvent;
+    public event EventHandler GetNextPageEvent;
+    public event EventHandler SortEvent;
+
     private void AssociateEvents() {
+
+      createBtn.Click += delegate {
+        validationBindingSource.DataSource = new Administrator();
+        CreateEvent?.Invoke(this, EventArgs.Empty);
+        UserControlUtils.CleanFields(this.detailTab.Controls);
+        SwitchToDetailTab();
+        errorProvider.Clear();
+      };
+
       saveBtn.Click += delegate {
-        SaveEvent?.Invoke(this, EventArgs.Empty);
-        //SwitchToListingTab();
-        MessageBox.Show(message);
+        validationBindingSource.EndEdit();
+        Administrator validated = validationBindingSource.Current as Administrator;
+        if (validated.IsValid) {
+          SaveEvent?.Invoke(this, EventArgs.Empty);
+          SwitchToListingTab();
+        }
       };
 
       cancelBtn.Click += delegate {
-        UserControlUtils.CleanFields(this.Controls);
-        //SwitchToListingTab();
+        SwitchToListingTab();
+      };
+
+      searchBtn.Click += delegate {
+        SearchEvent?.Invoke(this, EventArgs.Empty);
+      };
+      searchField.KeyDown += (sender, e) => {
+        if (e.KeyCode == Keys.Enter) {
+          SearchEvent?.Invoke(this, EventArgs.Empty);
+          e.SuppressKeyPress = true;
+        }
+      };
+
+      prePageBtn.Click += delegate {
+        GetPrePageEvent?.Invoke(this, EventArgs.Empty);
+      };
+      nextPageBtn.Click += delegate {
+        GetNextPageEvent?.Invoke(this, EventArgs.Empty);
+      };
+
+      dataGridView.CellClick += delegate (object sender, DataGridViewCellEventArgs e) {
+        if (e.RowIndex == -1) {
+          return;
+        }
+        if (e.ColumnIndex == 0) {
+          validationBindingSource.DataSource = new Administrator();
+          SwitchToDetailTab();
+          UpdateEvent?.Invoke(this, EventArgs.Empty);
+          errorProvider.Clear();
+        }
+        if (e.ColumnIndex == 1) {
+          DeleteEvent?.Invoke(this, EventArgs.Empty);
+        }
+      };
+
+      // Sort event
+      dataGridView.ColumnHeaderMouseClick += delegate (object sender, DataGridViewCellMouseEventArgs e) {
+        if (e.ColumnIndex == 0 || e.ColumnIndex == 1) {
+          return;
+        }
+        string clickedHeaderText = dataGridView.Columns[e.ColumnIndex].HeaderText;
+        if (clickedHeaderText != orderBy) {
+          orderBy = clickedHeaderText;
+          orderDirection = OrderDirection.ASC;
+        }
+        else {
+          switch (orderDirection) {
+            case OrderDirection.ASC:
+            orderDirection = OrderDirection.DESC;
+            break;
+            case OrderDirection.DESC:
+            orderDirection = OrderDirection.DESC;
+            orderBy = "created_time";
+            break;
+            default:
+            orderDirection = OrderDirection.ASC;
+            break;
+          }
+        }
+        SortEvent?.Invoke(this, EventArgs.Empty);
       };
     }
 
-    public event EventHandler CreateEvent;
-    public event EventHandler SaveEvent;
-
     private void UploadAvatar(object sender, EventArgs e) {
       OpenFileDialog opnfd = new OpenFileDialog();
-      opnfd.Filter = "Image Files (*.jpg;*.jpeg;.*.gif;)|*.jpg;*.jpeg;.*.gif";
+      opnfd.Filter = "Image Files (*.png;*.jpg;*.jpeg;.*.gif;)|*.png;*.jpg;*.jpeg;.*.gif";
       if (opnfd.ShowDialog() == DialogResult.OK) {
         avatarPictureBox.Image = new Bitmap(opnfd.FileName);
+        avatarFilename = opnfd.FileName;
       }
     }
-    //private void
 
     #endregion
 
     #region Variables
 
+    private Guid _id;
     private bool _isUpdate;
     private bool _isSuccessful;
     private string _message;
+    private int _currentPage;
+    private int _totalPages;
+    private string _orderBy;
+    private OrderDirection _orderDirection;
+    private BindingSource validationBindingSource = new BindingSource();
 
+    public Guid id {
+      get => _id;
+      set => _id = value;
+    }
     public bool isUpdate {
       get => _isUpdate;
       set => _isUpdate = value;
@@ -110,6 +244,38 @@ namespace CBM.Views {
     public string message {
       get => _message;
       set => _message = value;
+    }
+    public int currentPage {
+      get => _currentPage;
+      set => _currentPage = value;
+    }
+    public int totalPages {
+      get => _totalPages;
+      set => _totalPages = value;
+    }
+    public string orderBy {
+      get => _orderBy;
+      set => _orderBy = value;
+    }
+    public OrderDirection orderDirection {
+      get => _orderDirection;
+      set => _orderDirection = value;
+    }
+
+    public string keyword {
+      get => searchField.Texts;
+      set => searchField.Texts = value;
+    }
+    public Button GetPrePageBtn() {
+      return prePageBtn;
+    }
+
+    public Button GetNextPageBtn() {
+      return nextPageBtn;
+    }
+
+    public Label GetPageLabel() {
+      return pageLabel;
     }
 
     public string username {
@@ -132,6 +298,11 @@ namespace CBM.Views {
       get => zipcodeField.Texts;
       set => zipcodeField.Texts = value;
     }
+    public Image avatar {
+      get => avatarPictureBox.Image;
+      set => avatarPictureBox.Image = value;
+    }
+    public string avatarFilename;
 
     #endregion
   }

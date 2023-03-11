@@ -19,7 +19,7 @@ namespace CBM.Customs {
     private int borderRadius = 0;
     private Color placeholderColor = ColorTranslator.FromHtml(Constant.PLACEHOLDER_COLOR);
     private string placeholderText = "";
-    private bool isPlaceholder = false;
+    public bool isPlaceholder = false;
     private bool isPasswordChar = false;
 
     public CBMTextbox() {
@@ -107,6 +107,7 @@ namespace CBM.Customs {
       }
       set {
         textBox1.Text = value;
+        isPlaceholder = false;
         SetPlaceholder();
       }
     }
@@ -156,10 +157,10 @@ namespace CBM.Customs {
       if (isPlaceholder && placeholderText != "") {
         isPlaceholder = false;
         textBox1.Text = "";
-        textBox1.ForeColor = this.ForeColor;
-        if (isPasswordChar)
-          textBox1.UseSystemPasswordChar = true;
       }
+      textBox1.ForeColor = this.ForeColor;
+      if (isPasswordChar)
+        textBox1.UseSystemPasswordChar = true;
     }
     
     private void SetTextBoxRoundedRegion() {
@@ -252,6 +253,7 @@ namespace CBM.Customs {
       textBox1.MouseEnter += textBox1_MouseEnter;
       textBox1.MouseLeave += textBox1_MouseLeave;
       textBox1.KeyPress += textBox1_KeyPress;
+      textBox1.KeyDown += textBox1_KeyDown;
       textBox1.Enter += textBox1_Enter;
       textBox1.Leave += textBox1_Leave;
       textBox1.TextChanged += textBox1_TextChanged;
@@ -268,6 +270,9 @@ namespace CBM.Customs {
     }
     private void textBox1_KeyPress(object sender, KeyPressEventArgs e) {
       this.OnKeyPress(e);
+    }
+    private void textBox1_KeyDown(object sender, EventArgs e) {
+      this.OnClick(e);
     }
     private void textBox1_Enter(object sender, EventArgs e) {
       isFocused = true;

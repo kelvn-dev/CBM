@@ -2,6 +2,7 @@
 using CBM.Utilities;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.SqlClient;
 using System.Reflection;
 using static CBM.Enum;
@@ -10,7 +11,7 @@ namespace CBM.Services {
   public class BaseService<T> where T : BaseModel, new() {
 
     private static readonly string tableName = HelperUtils.GetTableName(typeof(T));
-    private static readonly int pageSize = 5;
+    private static readonly int pageSize = 10;
 
     public static void Create(T model) {
       string sqlQuery = $"INSERT INTO {tableName}";
@@ -20,7 +21,6 @@ namespace CBM.Services {
         HelperUtils.MapModelToInsertCommand(model, command);
         command.Parameters.AddWithValue("@id", model.id);
         command.Parameters.AddWithValue("@created_time", TimeUtils.GetCurrentFormattedTime());
-        Console.WriteLine(command.CommandText);
         try {
           int result = command.ExecuteNonQuery();
           if (result < 1) {
@@ -86,7 +86,8 @@ namespace CBM.Services {
         var reader = command.ExecuteReader();
         while (reader.Read()) {
           for (int i = 0; i < reader.FieldCount; i++) {
-            model[reader.GetName(i)] = reader.GetValue(i);
+            //model[reader.GetName(i)] = reader.GetValue(i);
+            model.SetValue(reader.GetName(i), reader.GetValue(i));
           }
           isFound = true;
           break;
@@ -101,19 +102,27 @@ namespace CBM.Services {
     public static List<T> GetPaginatedData(
       int pageIndex,
       string keyword = null,
-      string orderBy = "createdTime",
+      string orderBy = "created_time",
       OrderDirection orderDirection = OrderDirection.DESC
      ) {
 
+      if (orderBy != null && !orderBy.Equals("created_time")) {
+        PropertyInfo sortedProperty = HelperUtils.GetPropertyByDisplayName<T>(orderBy);
+        orderBy = HelperUtils.GetColumnName(sortedProperty);
+      }
+
       string selectStatement = $"SELECT * FROM {tableName} ";
-      string sortStatement = $" ORDER BY {orderBy ?? "createdTime"} {orderDirection.ToString()} ";
+      string sortStatement = $" ORDER BY {orderBy ?? "created_time"} {orderDirection.ToString()} ";
       string pagingStatement = $" OFFSET {pageIndex * pageSize} ROWS FETCH NEXT {pageSize} ROWS ONLY ";
       string conditionStatement = "";
       if (!string.IsNullOrEmpty(keyword)) {
         conditionStatement = " WHERE";
         PropertyInfo[] propertyInfos = HelperUtils.GetPublicPropertyInfos(typeof(T));
         foreach (PropertyInfo propertyInfo in propertyInfos) {
-          conditionStatement += $" OR {propertyInfo.Name} LIKE '%{keyword}%' ";
+          ColumnAttribute column = propertyInfo.GetCustomAttribute<ColumnAttribute>();
+          if (column != null) {
+            conditionStatement += $" OR {column.Name} LIKE '%{keyword}%' ";
+          }
         }
         conditionStatement = conditionStatement.Replace("WHERE OR", "WHERE");
       }
@@ -128,7 +137,8 @@ namespace CBM.Services {
         while (reader.Read()) {
           T model = new T();
           for (int i = 0; i < reader.FieldCount; i++) {
-            model[reader.GetName(i)] = reader.GetValue(i);
+            //model[reader.GetName(i)] = reader.GetValue(i);
+            model.SetValue(reader.GetName(i), reader.GetValue(i));
           }
           modelList.Add(model);
         }

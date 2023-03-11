@@ -1,5 +1,6 @@
 ﻿using CBM.Customs;
 using FontAwesome.Sharp;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
@@ -43,6 +44,8 @@ namespace CBM.Utilities {
       button.BackColor = ColorTranslator.FromHtml(Constant.RED_COLOR);
       button.ForeColor = ColorTranslator.FromHtml(Constant.WHITE_COLOR);
       button.BorderColor = ColorTranslator.FromHtml(Constant.RED_COLOR);
+      button.BorderRadius = Constant.MIN_BORDER_RADIUS;
+      button.BorderSize = Constant.MIN_BORDER_SIZE;
       button.Font = new Font(Constant.FONT_FAMILY, Constant.NORMAL_FONT_SIZE);
     }
 
@@ -67,18 +70,26 @@ namespace CBM.Utilities {
     }
 
     public static void CssDatagridView(DataGridView dataGridView) {
+      dataGridView.BackgroundColor = Color.White;
+      dataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
+      // Css header
       DataGridViewCellStyle headerDataGridViewCellStyle = new DataGridViewCellStyle();
-      headerDataGridViewCellStyle.BackColor = ColorTranslator.FromHtml("#362f4b");
+      headerDataGridViewCellStyle.BackColor = ColorTranslator.FromHtml(Constant.DARK_BLUE_COLOR);
       headerDataGridViewCellStyle.ForeColor = Color.White;
       headerDataGridViewCellStyle.Font = new Font("Poppins", 12);
+      headerDataGridViewCellStyle.Padding = new Padding(20, 0, 0, 0);
 
+      // Css body
       DataGridViewCellStyle dataGridViewCellStyle = new DataGridViewCellStyle();
       dataGridViewCellStyle.BackColor = Color.White; ;
       dataGridViewCellStyle.ForeColor = ColorTranslator.FromHtml("#959595");
       dataGridViewCellStyle.SelectionBackColor = dataGridViewCellStyle.BackColor;
       dataGridViewCellStyle.SelectionForeColor = dataGridViewCellStyle.ForeColor;
       dataGridViewCellStyle.Font = new Font("Poppins", 12);
+      dataGridViewCellStyle.Padding = new Padding(20, 0, 0, 0);
 
+      // Css odd row
       DataGridViewCellStyle alternatingRowsDefaultCellStyle = new DataGridViewCellStyle();
       alternatingRowsDefaultCellStyle.BackColor = ColorTranslator.FromHtml("#f6f6f6");
       alternatingRowsDefaultCellStyle.ForeColor = ColorTranslator.FromHtml("#959595");
@@ -91,33 +102,47 @@ namespace CBM.Utilities {
       dataGridView.EnableHeadersVisualStyles = false;
       dataGridView.AlternatingRowsDefaultCellStyle = alternatingRowsDefaultCellStyle;
 
+      // Remove all borders
       dataGridView.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
       dataGridView.CellBorderStyle = DataGridViewCellBorderStyle.None;
       dataGridView.BorderStyle = BorderStyle.None;
 
       dataGridView.RowHeadersVisible = false;
       dataGridView.AllowUserToAddRows = false;
+      dataGridView.AllowUserToDeleteRows = false;
+      dataGridView.AllowUserToResizeColumns = false;
 
-      dataGridView.ColumnHeadersHeight = 55;
+      // Increase height of header and rows
       dataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
+      dataGridView.ColumnHeadersHeight = 100;
+      dataGridView.RowTemplate.Height = 100;
+    }
 
-      dataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-
-      // Adjust height automatically
+    public static void AjustHeightAutomatically(DataGridView dataGridView) {
       int height = dataGridView.ColumnHeadersHeight;
       foreach (DataGridViewRow row in dataGridView.Rows) {
         height += row.Height;
       }
       dataGridView.Height = height;
+    }
 
-      // !!! Add action column (Need to refactor this)
-      DataGridViewButtonColumn btn = new DataGridViewButtonColumn();
-      btn.HeaderText = "Action";
-      btn.Text = "Edit";
-      btn.Name = "editBtn";
-      btn.UseColumnTextForButtonValue = true;
-      dataGridView.Columns.Add(btn);
+    public static void AddActionColumns(DataGridView dataGridView) {
+      DataGridViewImageColumn column = new DataGridViewImageColumn();
+      column.Name = "update";
+      column.HeaderText = "Update";
+      column.ImageLayout = DataGridViewImageCellLayout.Normal;
+      column.Image = Properties.Resources.edit;
+      dataGridView.Columns.Add(column);
 
+      column = new DataGridViewImageColumn();
+      column.Name = "delete";
+      column.HeaderText = "Delete";
+      column.ImageLayout = DataGridViewImageCellLayout.Normal;
+      column.Image = Properties.Resources.trash_icon_14_48;
+      dataGridView.Columns.Add(column);
+     
+      dataGridView.Columns["update"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;  // [dataGridView.ColumnCount - 1]
+      dataGridView.Columns["delete"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
     }
 
     public static void CssIconButton(IconButton iconButton, Color backColor, Color color, int size = Constant.NORMAL_ICON_SIZE) {
@@ -137,11 +162,18 @@ namespace CBM.Utilities {
 
     public static void CssFieldLabel(Label label) {
       label.ForeColor = Color.Black;
+      label.BorderStyle = BorderStyle.None;
       label.Font = new Font(Constant.FONT_FAMILY, Constant.NORMAL_FONT_SIZE);
+    }
+    public static void CssPageLabel(Label label) {
+      label.ForeColor = ColorTranslator.FromHtml(Constant.BLUE_COLOR);
+      label.BorderStyle = BorderStyle.None;
+      label.Font = new Font(Constant.FONT_FAMILY, 10);
     }
 
     public static void CssTextbox(CBMTextbox textBox, string placeholderText) {
       //textBox.Multiline = true;
+      textBox.Padding = new Padding(30, 14, 14, 14);
       textBox.Font = new Font(Constant.FONT_FAMILY, Constant.NORMAL_FONT_SIZE);
 
       textBox.PlaceholderText = placeholderText;
@@ -149,6 +181,13 @@ namespace CBM.Utilities {
       textBox.BorderSize = Constant.MIN_BORDER_SIZE;
       textBox.BorderRadius = Constant.MIN_BORDER_RADIUS;
       textBox.BorderFocusColor = Color.Black;
+    }
+
+    public static void CssSearchTextbox(CBMTextbox textbox) {
+      CssTextbox(textbox, Constant.PLACEHOLDER_SEARCH_TXT);
+      textbox.Padding = new Padding(80, 14, 14, 14);
+      textbox.BorderSize = 2;
+      textbox.BorderRadius = Constant.MAX_BORDER_RADIUS;
     }
 
     #endregion
