@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using CBM.Presenters;
+using CBM.Views;
+using System;
 using System.Windows.Forms;
 
 namespace CBM {
@@ -13,7 +12,10 @@ namespace CBM {
     static void Main() {
       Application.EnableVisualStyles();
       Application.SetCompatibleTextRenderingDefault(false);
-      Application.Run(new Form1());
+      //AdministratorView view = new AdministratorView();
+      //AdministratorPresenter presenter = new AdministratorPresenter(view);
+
+      Application.Run(new CommonView());
     }
   }
 }
